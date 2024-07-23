@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
-import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton } from "@mui/material";
+import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from "@mui/material";
+import "./styles.css";
 
 const NavButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
@@ -8,6 +9,11 @@ const NavButton = styled(Button)(({ theme }) => ({
   borderRadius: "32px",
   width: "160px",
   margin: "0 8px",
+  fontFamily: theme.typography.textFont,
+  ":hover": {
+    color: "black",
+    backgroundColor: "white",
+  },
 }));
 
 const NavContainer = styled(Box)({
@@ -26,9 +32,11 @@ const NavRight = styled("div")({
   alignItems: "center",
 });
 
-// temp
+/**
+ * PLACEHOLDER
+ **/
 const Logo = styled("div")({
-  backgroundColor: "lightgreen",
+  backgroundColor: "#9BA395",
   borderRadius: "50%",
   width: "3rem",
   height: "3rem",
@@ -37,11 +45,11 @@ const Logo = styled("div")({
 const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "transparent" }}>
-        <Toolbar>
+      <AppBar position="static" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
+        <Toolbar className="navbar">
           <NavContainer>
             <NavLeft>
-              <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+              <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 8 }}>
                 <Logo />
               </IconButton>
               <NavButton>Projects</NavButton>

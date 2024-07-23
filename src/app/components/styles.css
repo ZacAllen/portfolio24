@@ -1,0 +1,10 @@
+.navbar:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-top: 3px solid #d9d9d9;
+  background: black;
+  width: 100vw;
+  transform: translateY(-50%);
+}
