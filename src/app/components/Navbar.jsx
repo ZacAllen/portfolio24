@@ -7,7 +7,7 @@ const NavButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
   color: "black",
   borderRadius: "32px",
-  width: "160px",
+  width: "120px",
   margin: "0 8px",
   fontFamily: theme.typography.textFont,
   ":hover": {
