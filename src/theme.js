@@ -29,6 +29,10 @@ const theme = createTheme({
       main: "#3B7A9E",
       dark: "#152C38",
     },
+    accent: {
+      light: "#E6F0E5",
+      medium: "#C4C8BC",
+    },
   },
   breakpoints: {
     values: {
