@@ -45,7 +45,7 @@ const Logo = styled("div")({
 const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
         <Toolbar className="navbar">
           <NavContainer>
             <NavLeft>

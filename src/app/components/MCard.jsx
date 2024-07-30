@@ -11,6 +11,7 @@ import {
   IconButton,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Image from "next/image";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: "10px",
@@ -18,6 +19,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: "black",
   maxWidth: "345px",
   minWidth: "300px",
+  minHeight: "480px",
+  maxHeight: "511px",
 }));
 
 const StyledHeader = styled(CardHeader)(({ theme }) => ({
@@ -31,14 +34,17 @@ const StyledContent = styled(CardContent)(({ theme }) => ({
   backgroundColor: theme.palette.accent.light,
   border: "3px solid black",
   padding: "8px",
-  margin: "0 5px -30px 5px",
+  margin: "0 5px -24px 5px",
+  position: "relative",
+  bottom: "3px",
+  minHeight: "170px",
 }));
 
 const Type = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
-  padding: "0 15px 0 5px",
+  padding: "0 5px 0 15px",
   border: "solid 3px black",
   borderRadius: "10px",
   backgroundColor: theme.palette.accent.medium,
@@ -47,6 +53,7 @@ const Type = styled(Box)(({ theme }) => ({
 
 const Description = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.textFont,
+  fontWeight: "600",
 }));
 const FlavorText = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.textFont,
@@ -59,10 +66,12 @@ const CardColor = styled(Box)(({ theme, background }) => ({
 }));
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   padding: 0,
+  marginRight: "15px",
 }));
 
 // Consider propTypes
-const MCard = ({ title, image, type, description, flavorText, background }) => {
+const MCard = ({ title, image, type, description, flavorText, background, footerIcons, footerText }) => {
+  console.log(footerIcons);
   const theme = useTheme();
   return (
     <StyledCard>
@@ -95,10 +104,19 @@ const MCard = ({ title, image, type, description, flavorText, background }) => {
         </StyledContent>
       </CardColor>
 
-      <CardActions>
+      <CardActions sx={{ padding: "20px 15px 0 15px", display: "flex", justifyContent: "space-between" }}>
         {/* Github/LinkedIn or Project Tech */}
-        <IconButton></IconButton>
-        <IconButton></IconButton>
+        <div>
+          {footerIcons.map((icon) => (
+            <StyledIconButton size="large" edge="end" color="inherit">
+              <Image src={icon} width={24} height={24} alt="card_emblem" />
+            </StyledIconButton>
+          ))}
+        </div>
+
+        <Typography color={"white"} sx={{ fontFamily: theme.typography.textFont }}>
+          {footerText}
+        </Typography>
       </CardActions>
     </StyledCard>
   );
