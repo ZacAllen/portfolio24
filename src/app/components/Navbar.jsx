@@ -54,10 +54,14 @@ const Navbar = () => {
               </IconButton>
               <NavButton>Projects</NavButton>
               <NavButton>Resume</NavButton>
+              <NavButton>Blog</NavButton>
             </NavLeft>
             <NavRight>
-              <NavButton>Blog</NavButton>
               <NavButton>Contact</NavButton>
+              <IconButton size="large" edge="end" color="inherit" aria-label="menu" sx={{ mr: 8 }}>
+                {/* Will be dark mode */}
+                <Logo />
+              </IconButton>
             </NavRight>
           </NavContainer>
         </Toolbar>

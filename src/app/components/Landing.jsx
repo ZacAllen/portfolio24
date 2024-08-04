@@ -45,6 +45,18 @@ const Subtitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
+const SubHeader = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.light,
+  width: "120%",
+  borderRadius: "32px",
+  justifyContent: "start",
+  alignItems: "center",
+  display: "flex",
+  margin: "2rem 0",
+  minHeight: "5rem",
+  filter: "drop-shadow(8px 8px 1px black)",
+}));
+
 const Landing = ({}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -79,6 +91,9 @@ const Landing = ({}) => {
               <TitleContainer>
                 <Title>Zach Allen</Title>
                 <Subtitle>Front-End Developer</Subtitle>
+                <SubHeader>
+                  <Typography>Temporary text until I think of something different.</Typography>
+                </SubHeader>
               </TitleContainer>
             </Grid>
             <Grid item xs={3}>
