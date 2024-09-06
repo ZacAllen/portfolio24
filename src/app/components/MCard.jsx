@@ -13,14 +13,14 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(({ theme, isGroup }) => ({
   borderRadius: "10px",
   padding: "10px",
   backgroundColor: "black",
   maxWidth: "345px",
-  minWidth: "300px",
-  minHeight: "480px",
-  maxHeight: "511px",
+  minWidth: !isGroup && "300px",
+  minHeight: !isGroup && "480px",
+  maxHeight: !isGroup && "511px",
 }));
 
 const StyledHeader = styled(CardHeader)(({ theme }) => ({
@@ -70,11 +70,11 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 // Consider propTypes
-const MCard = ({ title, image, type, description, flavorText, background, footerIcons, footerText }) => {
+const MCard = ({ title, image, type, description, flavorText, background, footerIcons, footerText, isGroup }) => {
   console.log(footerIcons);
   const theme = useTheme();
   return (
-    <StyledCard>
+    <StyledCard isGroup={isGroup}>
       <CardColor background={background}>
         <StyledHeader
           title={title}

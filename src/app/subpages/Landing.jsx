@@ -2,7 +2,7 @@
 import linkedin from "../../../public/assets/img/linkedin.webp";
 import github from "../../../public/assets/img/github.png";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from "@mui/material";
-import MCard from "./MCard";
+import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
   height: "100vh",
@@ -74,7 +74,7 @@ const Landing = ({}) => {
           <Divider sx={{ margin: "20px 0", borderBottomColor: theme.palette.primary.light }} />
           <MCard
             title="Zach Allen"
-            image={"./assets/img/goku.png"}
+            image={"./assets/img/Me.jpg"}
             type="FE Developer - Human Nerd"
             background={myCardBg}
             description={description}
@@ -99,7 +99,7 @@ const Landing = ({}) => {
             <Grid item xs={3}>
               <MCard
                 title="Zach Allen"
-                image={"./assets/img/goku.png"}
+                image={"./assets/img/Me.jpg"}
                 type="FE Developer - Human Nerd"
                 background={myCardBg}
                 description={description}
