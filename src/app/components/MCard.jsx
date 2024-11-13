@@ -39,9 +39,9 @@ const StyledContent = styled(CardContent)(({ theme, isGroup }) => ({
   margin: "0 5px -24px 5px",
   position: "relative",
   bottom: "3px",
-  minHeight: "170px",
+  minHeight: "10.625rem",
   [theme.breakpoints.down("xl")]: {
-    minHeight: isGroup && "120px",
+    minHeight: isGroup && "7.5rem",
   },
 }));
 

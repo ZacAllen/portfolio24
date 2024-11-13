@@ -5,13 +5,13 @@ import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from 
 import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
-  height: "100vh",
+  minHeight: "100vh",
   display: "flex",
   alignItems: "center",
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
-  height: "100vh",
+  minHeight: "100vh",
   margin: "8rem 0",
 }));
 
@@ -59,7 +59,7 @@ const SubHeader = styled(Box)(({ theme }) => ({
 
 const Landing = ({}) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
   const description = `Zach is a front-end developer based in Atlanta, GA. In his free time, he enjoys gaming, studying history, taekwondo, and fencing.`;
   const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
@@ -86,8 +86,8 @@ const Landing = ({}) => {
       ) : (
         <LandingContainer>
           <Grid container sx={{ height: "40vh" }}>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={7} sx={{ display: "flex" }}>
+            <Grid item lg={1}></Grid>
+            <Grid item lg={7} className="flex">
               <TitleContainer>
                 <Title>Zach Allen</Title>
                 <Subtitle>Front-End Developer</Subtitle>
@@ -96,7 +96,7 @@ const Landing = ({}) => {
                 </SubHeader>
               </TitleContainer>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item lg={3} className="flex">
               <MCard
                 title="Zach Allen"
                 image={"./assets/img/Me.jpg"}
@@ -108,7 +108,7 @@ const Landing = ({}) => {
                 footerText={"© 1997"}
               />
             </Grid>
-            <Grid item xs={1}></Grid>
+            <Grid item lg={1}></Grid>
           </Grid>
         </LandingContainer>
       )}
