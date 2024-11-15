@@ -6,6 +6,7 @@ import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
   minHeight: "100vh",
+  marginBottom: "10.625rem",
   display: "flex",
   alignItems: "center",
 }));
@@ -57,9 +58,8 @@ const SubHeader = styled(Box)(({ theme }) => ({
   filter: "drop-shadow(8px 8px 1px black)",
 }));
 
-const Landing = ({}) => {
+const Landing = ({ isMobile }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
   const description = `Zach is a front-end developer based in Atlanta, GA. In his free time, he enjoys gaming, studying history, taekwondo, and fencing.`;
   const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
@@ -85,7 +85,7 @@ const Landing = ({}) => {
         </StyledBox>
       ) : (
         <LandingContainer>
-          <Grid container sx={{ height: "40vh" }}>
+          <Grid container sx={{ height: "40vh", marginBottom: "10.625rem" }}>
             <Grid item lg={1}></Grid>
             <Grid item lg={7} className="flex">
               <TitleContainer>

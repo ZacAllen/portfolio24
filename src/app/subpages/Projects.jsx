@@ -1,5 +1,11 @@
 "use client";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import MCard from "../components/MCard";
 import React, { useEffect, useState } from "react";
 // import useWindowSize from "@/utils/helpers/usewindowsize";
@@ -13,6 +19,9 @@ const ProjectsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   maxWidth: "100vw",
   alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    alignItems: "baseline",
+  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -78,7 +87,7 @@ const CardContainer = styled("div", {
   justifyContent: "center",
   gap: "10px",
   position: "relative",
-  marginBottom: "8rem",
+  marginBottom: "12rem",
   "& .mCard": {
     opacity: "0",
     maxWidth: "calc(22% - 20px)",
@@ -109,7 +118,7 @@ const CardContainer = styled("div", {
   },
 }));
 
-const Projects = ({}) => {
+const Projects = ({ isMobile }) => {
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
   const description = `Zach is a front-end developer based in Atlanta, GA. In his free time, he enjoys gaming, studying history, taekwondo, and fencing.`;
   const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
@@ -124,79 +133,97 @@ const Projects = ({}) => {
 
   const pageWidth = 1920;
   const pageHeight = 1080;
+  const projectCards = [
+    <div className={!isMobile && "mCard"}>
+      <MCard
+        isGroup
+        title="Sveltedex"
+        image={"./assets/img/Me.jpg"}
+        type="FE Developer - Human Nerd"
+        background={myCardBg}
+        description={description}
+        // flavorText={flavorText}
+        footerIcons={footerIcons}
+        footerText={"© 1997"}
+      />
+    </div>,
+
+    <div className={!isMobile && "mCard"}>
+      <MCard
+        isGroup
+        title="Sveltedex"
+        image={"./assets/img/Me.jpg"}
+        type="FE Developer - Human Nerd"
+        background={myCardBg}
+        description={description}
+        // flavorText={flavorText}
+        footerIcons={footerIcons}
+        footerText={"© 1997"}
+      />
+    </div>,
+    <div className={!isMobile && "mCard"}>
+      <MCard
+        isGroup
+        title="Sveltedex"
+        image={"./assets/img/Me.jpg"}
+        type="FE Developer - Human Nerd"
+        background={myCardBg}
+        description={description}
+        // flavorText={flavorText}
+        footerIcons={footerIcons}
+        footerText={"© 1997"}
+      />
+    </div>,
+    <div className={!isMobile && "mCard"}>
+      <MCard
+        isGroup
+        title="Sveltedex"
+        image={"./assets/img/Me.jpg"}
+        type="FE Developer - Human Nerd"
+        background={myCardBg}
+        description={description}
+        // flavorText={flavorText}
+        footerIcons={footerIcons}
+        footerText={"© 1997"}
+      />
+    </div>,
+    <div className={!isMobile && "mCard"}>
+      <MCard
+        isGroup
+        title="Sveltedex"
+        image={"./assets/img/Me.jpg"}
+        type="FE Developer - Human Nerd"
+        background={myCardBg}
+        description={description}
+        // flavorText={flavorText}
+        footerIcons={footerIcons}
+        footerText={"© 1997"}
+      />
+    </div>,
+  ];
 
   return (
     <>
       <Title>Projects</Title>
       <ProjectsContainer>
-        <CardContainer pageHeight={pageHeight} pageWidth={pageWidth} triggerAnim={triggerAnim} ref={ref}>
-          <div className="mCard">
-            <MCard
-              isGroup
-              title="Sveltedex"
-              image={"./assets/img/Me.jpg"}
-              type="FE Developer - Human Nerd"
-              background={myCardBg}
-              description={description}
-              // flavorText={flavorText}
-              footerIcons={footerIcons}
-              footerText={"© 1997"}
-            />
+        {isMobile ? (
+          <div className="w-full mt-8">
+            <Swiper
+              spaceBetween={100}
+              slidesPerView={1.5}
+              modules={[Navigation, Pagination, Scrollbar, A11y]}
+              direction="horizontal"
+            >
+              {projectCards.map((card) => (
+                <SwiperSlide>{card}</SwiperSlide>
+              ))}
+            </Swiper>
           </div>
-
-          <div className="mCard">
-            <MCard
-              isGroup
-              title="Sveltedex"
-              image={"./assets/img/Me.jpg"}
-              type="FE Developer - Human Nerd"
-              background={myCardBg}
-              description={description}
-              // flavorText={flavorText}
-              footerIcons={footerIcons}
-              footerText={"© 1997"}
-            />
-          </div>
-          <div className="mCard">
-            <MCard
-              isGroup
-              title="Sveltedex"
-              image={"./assets/img/Me.jpg"}
-              type="FE Developer - Human Nerd"
-              background={myCardBg}
-              description={description}
-              // flavorText={flavorText}
-              footerIcons={footerIcons}
-              footerText={"© 1997"}
-            />
-          </div>
-          <div className="mCard">
-            <MCard
-              isGroup
-              title="Sveltedex"
-              image={"./assets/img/Me.jpg"}
-              type="FE Developer - Human Nerd"
-              background={myCardBg}
-              description={description}
-              // flavorText={flavorText}
-              footerIcons={footerIcons}
-              footerText={"© 1997"}
-            />
-          </div>
-          <div className="mCard">
-            <MCard
-              isGroup
-              title="Sveltedex"
-              image={"./assets/img/Me.jpg"}
-              type="FE Developer - Human Nerd"
-              background={myCardBg}
-              description={description}
-              // flavorText={flavorText}
-              footerIcons={footerIcons}
-              footerText={"© 1997"}
-            />
-          </div>
-        </CardContainer>
+        ) : (
+          <CardContainer pageHeight={pageHeight} pageWidth={pageWidth} triggerAnim={triggerAnim} ref={ref}>
+            {projectCards.map((card) => card)}
+          </CardContainer>
+        )}
       </ProjectsContainer>
     </>
   );
