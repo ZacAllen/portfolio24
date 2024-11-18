@@ -1,6 +1,7 @@
 "use client";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { motion } from "motion/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,7 +9,6 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import MCard from "../components/MCard";
 import React, { useEffect, useState } from "react";
-// import useWindowSize from "@/utils/helpers/usewindowsize";
 import { useInView } from "react-intersection-observer";
 
 import linkedin from "../../../public/assets/img/linkedin.webp";
@@ -77,7 +77,6 @@ const fan = (rC, tX, tY, pW, pH, triggerAnim) => {
 
 const animTime = `0.5s`;
 
-//! Styled div instead?
 const CardContainer = styled("div", {
   shouldForwardProp: (prop) => prop !== "pageWidth" && prop !== "pageHeight" && prop !== "triggerAnim",
 })(({ theme, pageWidth, pageHeight, triggerAnim }) => ({
@@ -95,6 +94,10 @@ const CardContainer = styled("div", {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
+    cursor: "pointer",
+    "&:hover": {
+      zIndex: "99 !important",
+    },
   },
   "& .mCard:nth-child(1)": {
     zIndex: 5,
@@ -125,6 +128,7 @@ const Projects = ({ isMobile }) => {
   const footerIcons = [github, linkedin];
   const [triggerAnim, setTriggerAnim] = useState(false);
   const { ref, inView } = useInView({});
+  const isTablet = useMediaQuery("(min-width:768px)");
 
   useEffect(() => {
     // ** Just do initial animation on scroll-in for now
@@ -135,70 +139,80 @@ const Projects = ({ isMobile }) => {
   const pageHeight = 1080;
   const projectCards = [
     <div className={!isMobile && "mCard"}>
-      <MCard
-        isGroup
-        title="Sveltedex"
-        image={"./assets/img/Me.jpg"}
-        type="FE Developer - Human Nerd"
-        background={myCardBg}
-        description={description}
-        // flavorText={flavorText}
-        footerIcons={footerIcons}
-        footerText={"© 1997"}
-      />
+      <motion.div whileHover={{ scale: 1.1 }}>
+        <MCard
+          isGroup
+          title="Sveltedex"
+          image={"./assets/img/Me.jpg"}
+          type="FE Developer - Human Nerd"
+          background={myCardBg}
+          description={description}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 1997"}
+        />
+      </motion.div>
     </div>,
 
     <div className={!isMobile && "mCard"}>
-      <MCard
-        isGroup
-        title="Sveltedex"
-        image={"./assets/img/Me.jpg"}
-        type="FE Developer - Human Nerd"
-        background={myCardBg}
-        description={description}
-        // flavorText={flavorText}
-        footerIcons={footerIcons}
-        footerText={"© 1997"}
-      />
+      <motion.div whileHover={{ scale: 1.1 }}>
+        <MCard
+          isGroup
+          title="Numberle"
+          image={"./assets/img/Me.jpg"}
+          type="FE Developer - Human Nerd"
+          background={myCardBg}
+          description={description}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 1997"}
+        />
+      </motion.div>
     </div>,
     <div className={!isMobile && "mCard"}>
-      <MCard
-        isGroup
-        title="Sveltedex"
-        image={"./assets/img/Me.jpg"}
-        type="FE Developer - Human Nerd"
-        background={myCardBg}
-        description={description}
-        // flavorText={flavorText}
-        footerIcons={footerIcons}
-        footerText={"© 1997"}
-      />
+      <motion.div whileHover={{ scale: 1.1 }}>
+        <MCard
+          isGroup
+          title="Portfolio Website"
+          image={"./assets/img/Me.jpg"}
+          type="FE Developer - Human Nerd"
+          background={myCardBg}
+          description={description}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 1997"}
+        />
+      </motion.div>
     </div>,
     <div className={!isMobile && "mCard"}>
-      <MCard
-        isGroup
-        title="Sveltedex"
-        image={"./assets/img/Me.jpg"}
-        type="FE Developer - Human Nerd"
-        background={myCardBg}
-        description={description}
-        // flavorText={flavorText}
-        footerIcons={footerIcons}
-        footerText={"© 1997"}
-      />
+      <motion.div whileHover={{ scale: 1.1 }}>
+        <MCard
+          isGroup
+          title="TBD"
+          image={"./assets/img/Me.jpg"}
+          type="FE Developer - Human Nerd"
+          background={myCardBg}
+          description={description}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 1997"}
+        />
+      </motion.div>
     </div>,
     <div className={!isMobile && "mCard"}>
-      <MCard
-        isGroup
-        title="Sveltedex"
-        image={"./assets/img/Me.jpg"}
-        type="FE Developer - Human Nerd"
-        background={myCardBg}
-        description={description}
-        // flavorText={flavorText}
-        footerIcons={footerIcons}
-        footerText={"© 1997"}
-      />
+      <motion.div whileHover={{ scale: 1.1 }}>
+        <MCard
+          isGroup
+          title="TBD"
+          image={"./assets/img/Me.jpg"}
+          type="FE Developer - Human Nerd"
+          background={myCardBg}
+          description={description}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 1997"}
+        />
+      </motion.div>
     </div>,
   ];
 
@@ -209,8 +223,8 @@ const Projects = ({ isMobile }) => {
         {isMobile ? (
           <div className="w-full mt-8">
             <Swiper
-              spaceBetween={100}
-              slidesPerView={1.5}
+              spaceBetween={20}
+              slidesPerView={isTablet ? 2.2 : 1.2}
               modules={[Navigation, Pagination, Scrollbar, A11y]}
               direction="horizontal"
             >
