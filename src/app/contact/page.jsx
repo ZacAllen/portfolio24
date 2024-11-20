@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography, styled } from "@mui/material";
+import { Typography, Box, TextField, styled } from "@mui/material";
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
@@ -13,6 +13,21 @@ const ContactText = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.textFont,
   fontSize: "2rem",
 }));
+
+const InputText = styled("p")(({ theme }) => ({
+  color: "white",
+  fontFamily: theme.typography.textFont,
+  fontSize: "1rem",
+}));
+
+const FormBox = styled(Box)(({ theme }) => ({
+  "& .MuiTextField-root": {
+    m: 1,
+    width: "50%",
+  },
+}));
+
+const Field = styled(TextField)(({ theme }) => ({}));
 
 const Contact = () => {
   const bruh = [];
@@ -27,7 +42,22 @@ const Contact = () => {
             </ContactText>
             <ContactText>Lorem ipsum</ContactText>
           </div>
-          <div className="col-span-6"></div>
+          <div className="col-span-6">
+            <FormBox component="form" noValidate autoComplete="off">
+              <div>
+                <InputText>Full Name</InputText>
+                <Field required id="outlined-required" label="Required" placeholder="Your name"></Field>
+              </div>
+              <div>
+                <InputText>Email Address</InputText>
+                <Field required id="outlined-required" label="Required" placeholder="email"></Field>
+              </div>
+              <div>
+                <InputText>Message</InputText>
+                <Field required id="outlined-required" label="Required" placeholder=""></Field>
+              </div>
+            </FormBox>
+          </div>
         </div>
       </div>
     </>
