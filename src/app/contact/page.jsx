@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography, Box, TextField, styled } from "@mui/material";
+import { Typography, Box, TextField, styled, useTheme } from "@mui/material";
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "white",
@@ -47,7 +47,7 @@ const FormBox = styled(Box)(({ theme }) => ({
 const Field = styled(TextField)(({ theme }) => ({}));
 
 const Contact = () => {
-  const bruh = [];
+  const theme = useTheme();
   return (
     <>
       <div className="w-full h-screen">
@@ -63,15 +63,47 @@ const Contact = () => {
             <FormBox component="form" noValidate autoComplete="off">
               <div>
                 <InputText>Full Name</InputText>
-                <Field required id="outlined-required" label="Required" placeholder="Your name"></Field>
+                <Field
+                  InputLabelProps={{
+                    style: {
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  required
+                  id="outlined-required"
+                  label="Required"
+                  placeholder="Your name"
+                ></Field>
               </div>
               <div>
                 <InputText>Email Address</InputText>
-                <Field required id="outlined-required" label="Required" placeholder="Email"></Field>
+                <Field
+                  InputLabelProps={{
+                    style: {
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  required
+                  id="outlined-required"
+                  label="Required"
+                  placeholder="Email"
+                ></Field>
               </div>
               <div>
                 <InputText>Message</InputText>
-                <Field multiline={true} rows={8} required id="outlined-required" label="Required" placeholder=""></Field>
+                <Field
+                  InputLabelProps={{
+                    style: {
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  multiline={true}
+                  rows={8}
+                  required
+                  id="outlined-required"
+                  label="Required"
+                  placeholder=""
+                ></Field>
               </div>
             </FormBox>
           </div>
