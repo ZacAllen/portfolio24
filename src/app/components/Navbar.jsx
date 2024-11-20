@@ -2,6 +2,7 @@
 import * as React from "react";
 import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from "@mui/material";
 import "./styles.css";
+import Link from "next/link";
 
 const NavButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
@@ -52,12 +53,14 @@ const Navbar = () => {
               <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 8 }}>
                 <Logo />
               </IconButton>
-              <NavButton>Projects</NavButton>
+              <NavButton href="/">Projects</NavButton>
               <NavButton>Resume</NavButton>
               {/* <NavButton>Blog</NavButton> */}
             </NavLeft>
             <NavRight>
-              <NavButton>Contact</NavButton>
+              <Link href="/contact">
+                <NavButton>Contact</NavButton>
+              </Link>
               <IconButton size="large" edge="end" color="inherit" aria-label="menu" sx={{ mr: 8 }}>
                 {/* Will be dark mode */}
                 <Logo />

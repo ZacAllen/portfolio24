@@ -97,58 +97,61 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
  * @param {array} footerIcons - Array of icon URLs to display in the card footer.
  * @param {string} footerText - Text to display alongside the icons in the footer.
  * @param {boolean} isGroup - Flag indicating whether the card belongs to a group (e.g. hand animation).
+ * @param {function} setCurrentCard - State setter for currently focused card element
  * @returns The fully styled card component with content and actions.
  */
-const MCard = ({ title, image, type, description, flavorText, background, footerIcons, footerText, isGroup }) => {
+const MCard = ({ title, image, type, description, flavorText, background, footerIcons, footerText, isGroup, setCurrentCard }) => {
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down("xl"));
 
   return (
-    <StyledCard isGroup={isGroup}>
-      <CardColor background={background}>
-        <StyledHeader
-          title={title}
-          titleTypographyProps={{
-            color: "black",
-            fontFamily: theme.typography.mainFont,
-            paddingLeft: "0.5rem",
-            fontSize: "1rem",
-          }}
-        />
-        <CardMedia
-          sx={{ margin: "auto", maxWidth: "95%", borderRight: "3px solid black", borderLeft: "3px solid black" }}
-          component="img"
-          height={md && isGroup ? "124" : "194"}
-          image={image}
-          alt="card image"
-        />
-        <Type>
-          <Typography sx={{ color: "black", fontFamily: theme.typography.mainFont }}>{type}</Typography>
-          <StyledIconButton size="large" edge="end" color="inherit">
-            <AccountCircleIcon />
-          </StyledIconButton>
-        </Type>
-        <StyledContent isGroup={isGroup}>
-          <Description isGroup={isGroup}>{description}</Description>
-          <FlavorText isGroup={isGroup}>{flavorText}</FlavorText>
-        </StyledContent>
-      </CardColor>
-
-      <CardActions sx={{ padding: "20px 15px 0 15px", display: "flex", justifyContent: "space-between" }}>
-        {/* Github/LinkedIn or Project Tech */}
-        <div>
-          {footerIcons.map((icon) => (
+    <div onMouseEnter={() => setCurrentCard && setCurrentCard(title)}>
+      <StyledCard isGroup={isGroup}>
+        <CardColor background={background}>
+          <StyledHeader
+            title={title}
+            titleTypographyProps={{
+              color: "black",
+              fontFamily: theme.typography.mainFont,
+              paddingLeft: "0.5rem",
+              fontSize: "1rem",
+            }}
+          />
+          <CardMedia
+            sx={{ margin: "auto", maxWidth: "95%", borderRight: "3px solid black", borderLeft: "3px solid black" }}
+            component="img"
+            height={md && isGroup ? "124" : "194"}
+            image={image}
+            alt="card image"
+          />
+          <Type>
+            <Typography sx={{ color: "black", fontFamily: theme.typography.mainFont }}>{type}</Typography>
             <StyledIconButton size="large" edge="end" color="inherit">
-              <Image src={icon} width={24} height={24} alt="card_emblem" />
+              <AccountCircleIcon />
             </StyledIconButton>
-          ))}
-        </div>
+          </Type>
+          <StyledContent isGroup={isGroup}>
+            <Description isGroup={isGroup}>{description}</Description>
+            <FlavorText isGroup={isGroup}>{flavorText}</FlavorText>
+          </StyledContent>
+        </CardColor>
 
-        <Typography color={"white"} sx={{ fontFamily: theme.typography.textFont }}>
-          {footerText}
-        </Typography>
-      </CardActions>
-    </StyledCard>
+        <CardActions sx={{ padding: "20px 15px 0 15px", display: "flex", justifyContent: "space-between" }}>
+          {/* Github/LinkedIn or Project Tech */}
+          <div>
+            {footerIcons.map((icon) => (
+              <StyledIconButton size="large" edge="end" color="inherit">
+                <Image src={icon} width={24} height={24} alt="card_emblem" />
+              </StyledIconButton>
+            ))}
+          </div>
+
+          <Typography color={"white"} sx={{ fontFamily: theme.typography.textFont }}>
+            {footerText}
+          </Typography>
+        </CardActions>
+      </StyledCard>
+    </div>
   );
 };
 

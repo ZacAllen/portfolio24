@@ -15,7 +15,7 @@ import linkedin from "../../../public/assets/img/linkedin.webp";
 import github from "../../../public/assets/img/github.png";
 
 const ProjectsContainer = styled("div")(({ theme }) => ({
-  height: "100vh",
+  height: "48rem",
   display: "flex",
   maxWidth: "100vw",
   alignItems: "center",
@@ -34,6 +34,15 @@ const Title = styled(Typography)(({ theme }) => ({
     padding: 0,
     fontSize: "4rem",
   },
+}));
+
+const CurrentProjectTitle = styled(Typography)(({ theme }) => ({
+  color: "white",
+  WebkitTextStroke: "1px navy",
+  fontFamily: theme.typography.mainFont,
+  position: "absolute",
+  top: "22rem",
+  fontSize: "2.5rem",
 }));
 
 /**
@@ -127,6 +136,7 @@ const Projects = ({ isMobile }) => {
   const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
   const footerIcons = [github, linkedin];
   const [triggerAnim, setTriggerAnim] = useState(false);
+  const [currentCard, setCurrentCard] = useState("");
   const { ref, inView } = useInView({});
   const isTablet = useMediaQuery("(min-width:768px)");
 
@@ -135,12 +145,17 @@ const Projects = ({ isMobile }) => {
     if (inView === true) setTriggerAnim(true);
   }, [inView]);
 
+  useEffect(() => {});
+
+  console.log("*** Cur", currentCard);
+
   const pageWidth = 1920;
   const pageHeight = 1080;
   const projectCards = [
     <div className={!isMobile && "mCard"}>
       <motion.div whileHover={{ scale: 1.1 }}>
         <MCard
+          setCurrentCard={setCurrentCard}
           isGroup
           title="Sveltedex"
           image={"./assets/img/Me.jpg"}
@@ -157,6 +172,7 @@ const Projects = ({ isMobile }) => {
     <div className={!isMobile && "mCard"}>
       <motion.div whileHover={{ scale: 1.1 }}>
         <MCard
+          setCurrentCard={setCurrentCard}
           isGroup
           title="Numberle"
           image={"./assets/img/Me.jpg"}
@@ -172,6 +188,7 @@ const Projects = ({ isMobile }) => {
     <div className={!isMobile && "mCard"}>
       <motion.div whileHover={{ scale: 1.1 }}>
         <MCard
+          setCurrentCard={setCurrentCard}
           isGroup
           title="Portfolio Website"
           image={"./assets/img/Me.jpg"}
@@ -187,8 +204,9 @@ const Projects = ({ isMobile }) => {
     <div className={!isMobile && "mCard"}>
       <motion.div whileHover={{ scale: 1.1 }}>
         <MCard
+          setCurrentCard={setCurrentCard}
           isGroup
-          title="TBD"
+          title="DreamyBot"
           image={"./assets/img/Me.jpg"}
           type="FE Developer - Human Nerd"
           background={myCardBg}
@@ -202,6 +220,7 @@ const Projects = ({ isMobile }) => {
     <div className={!isMobile && "mCard"}>
       <motion.div whileHover={{ scale: 1.1 }}>
         <MCard
+          setCurrentCard={setCurrentCard}
           isGroup
           title="TBD"
           image={"./assets/img/Me.jpg"}
@@ -236,6 +255,7 @@ const Projects = ({ isMobile }) => {
         ) : (
           <CardContainer pageHeight={pageHeight} pageWidth={pageWidth} triggerAnim={triggerAnim} ref={ref}>
             {projectCards.map((card) => card)}
+            <CurrentProjectTitle>{currentCard}</CurrentProjectTitle>
           </CardContainer>
         )}
       </ProjectsContainer>
