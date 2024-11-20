@@ -22,8 +22,25 @@ const InputText = styled("p")(({ theme }) => ({
 
 const FormBox = styled(Box)(({ theme }) => ({
   "& .MuiTextField-root": {
-    m: 1,
-    width: "50%",
+    width: "65%",
+    "& .MuiInputBase-root": {
+      backgroundColor: `${theme.palette.accent.light}0D`,
+      color: "white",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
+  },
+  "& .mui-cgzel9-MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {
+    background: "transparent",
   },
 }));
 
@@ -50,11 +67,11 @@ const Contact = () => {
               </div>
               <div>
                 <InputText>Email Address</InputText>
-                <Field required id="outlined-required" label="Required" placeholder="email"></Field>
+                <Field required id="outlined-required" label="Required" placeholder="Email"></Field>
               </div>
               <div>
                 <InputText>Message</InputText>
-                <Field required id="outlined-required" label="Required" placeholder=""></Field>
+                <Field multiline={true} rows={8} required id="outlined-required" label="Required" placeholder=""></Field>
               </div>
             </FormBox>
           </div>

@@ -11,6 +11,7 @@ const NavButton = styled(Button)(({ theme }) => ({
   width: "120px",
   margin: "0 8px",
   fontFamily: theme.typography.textFont,
+  fontWeight: 600,
   ":hover": {
     color: "black",
     backgroundColor: "white",
