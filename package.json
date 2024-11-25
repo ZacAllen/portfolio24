@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/cache": "^11.13.0",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
@@ -20,6 +21,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.13.1",
+    "sweetalert2": "^11.14.5",
     "swiper": "^11.1.14"
   },
   "devDependencies": {

@@ -92,7 +92,7 @@ const Landing = ({ isMobile }) => {
                 <Title>Zach Allen</Title>
                 <Subtitle>Front-End Developer</Subtitle>
                 <SubHeader>
-                  <Typography>Temporary text until I think of something different.</Typography>
+                  <Typography className="p-4">Temporary text until I think of something different.</Typography>
                 </SubHeader>
               </TitleContainer>
             </Grid>

@@ -32,6 +32,8 @@ const theme = createTheme({
     accent: {
       light: "#E6F0E5",
       medium: "#C4C8BC",
+      analogous: "#3A9E82",
+      complement: "#9E743A",
     },
   },
   breakpoints: {

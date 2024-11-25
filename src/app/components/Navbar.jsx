@@ -1,6 +1,8 @@
 "use client";
 import * as React from "react";
 import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from "@mui/material";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import "./styles.css";
 import Link from "next/link";
 
@@ -45,9 +47,10 @@ const Logo = styled("div")({
 });
 
 const Navbar = () => {
+  const theme = useTheme();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
         <Toolbar className="navbar">
           <NavContainer>
             <NavLeft>

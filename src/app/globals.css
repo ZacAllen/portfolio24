@@ -15,11 +15,26 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   margin: 0;
+  padding: 0 !important;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, var(--background-end-rgb)) var(--background-start-rgb);
+}
+
+.swal2-container {
+  padding: 0;
+}
+.swal2-html-container {
+  font-family: "Jaldi", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.swal2-popup {
+  border-radius: 4px;
+  box-shadow: 10px 8px black;
 }
 
 a {
