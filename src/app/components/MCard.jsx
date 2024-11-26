@@ -22,7 +22,7 @@ const StyledCard = styled(Card)(({ theme, isGroup }) => ({
   maxWidth: "345px",
   minWidth: !isGroup ? "300px" : "240px",
   minHeight: !isGroup && "480px",
-  maxHeight: !isGroup && "511px",
+  maxHeight: isGroup ? "450px" : "511px",
   [theme.breakpoints.down("md")]: {
     maxHeight: "392px",
   },

@@ -50,7 +50,7 @@ const Navbar = () => {
   const theme = useTheme();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "transparent", boxShadow: "none", zIndex: 2 }}>
         <Toolbar className="navbar">
           <NavContainer>
             <NavLeft>

@@ -122,11 +122,11 @@ const CardContainer = styled("div", {
   },
   "& .mCard:nth-child(4)": {
     zIndex: 2,
-    animation: `${fan("-15deg", -325, -340, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
+    animation: `${fan("-15deg", -315, -340, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
   "& .mCard:nth-child(5)": {
     zIndex: 1,
-    animation: `${fan("-30deg", -490, -450, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
+    animation: `${fan("-30deg", -460, -440, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
 }));
 
