@@ -20,7 +20,13 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, var(--background-end-rgb)) var(--background-start-rgb);
+  /* background: linear-gradient(to bottom, transparent, var(--background-end-rgb)) var(--background-start-rgb); */
+  background: linear-gradient(
+    to bottom,
+    var(--background-start-rgb) 2%,
+    var(--background-end-rgb) 50%,
+    var(--background-start-rgb) 100%
+  );
 }
 
 .swal2-container {

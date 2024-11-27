@@ -6,6 +6,13 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import "./styles.css";
 import Link from "next/link";
 
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  // backgroundColor: "transparent",
+  boxShadow: "none",
+  zIndex: 2,
+  background: `linear-gradient(to bottom, var(--background-start-rgb) 50%, transparent) `,
+}));
+
 const NavButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
   color: "black",
@@ -50,7 +57,7 @@ const Navbar = () => {
   const theme = useTheme();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ backgroundColor: "transparent", boxShadow: "none", zIndex: 2 }}>
+      <StyledAppBar position="fixed">
         <Toolbar className="navbar">
           <NavContainer>
             <NavLeft>
@@ -72,7 +79,7 @@ const Navbar = () => {
             </NavRight>
           </NavContainer>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
     </Box>
   );
 };

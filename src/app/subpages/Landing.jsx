@@ -5,14 +5,14 @@ import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from 
 import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
-  minHeight: "100vh",
-  marginBottom: "10.625rem",
+  minHeight: "80vh",
+  // marginBottom: "10.625rem",
   display: "flex",
   alignItems: "center",
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
-  minHeight: "100vh",
+  minHeight: "80vh",
   margin: "8rem 0",
 }));
 
