@@ -5,12 +5,15 @@ import Landing from "./subpages/Landing";
 
 const Home = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // Transition isMobile to use context?
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   return (
     <>
       <div>
         <Landing isMobile={isMobile} />
+      </div>
+      <div>
         <Projects isMobile={isMobile} />
       </div>
     </>

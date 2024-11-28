@@ -99,7 +99,9 @@ const Landing = ({ isMobile }) => {
                 <Subtitle>Front-End Developer</Subtitle>
                 <SubHeader>
                   <SubHeaderText className="p-4">
-                    Building smart, performant, & accessible sites worth sharing on the web.
+                    Building <span style={{ color: theme.palette.accent.complement }}>smart</span>,{" "}
+                    <span style={{ color: theme.palette.primary.main }}>performant</span>, &{" "}
+                    <span style={{ color: theme.palette.accent.analogous }}>accessible</span> sites worth sharing on the web.
                   </SubHeaderText>
                 </SubHeader>
               </TitleContainer>
