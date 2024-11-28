@@ -7,7 +7,8 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: #152c38;
-  --background-end-rgb: #3b7a9e;
+  /* --background-end-rgb: #3b7a9e; */
+  --background-end-rgb: rgb(39, 64, 78);
 }
 
 html,

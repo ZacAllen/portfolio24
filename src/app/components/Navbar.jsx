@@ -2,7 +2,7 @@
 import * as React from "react";
 import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from "@mui/material";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import "./styles.css";
 import Link from "next/link";
 
@@ -15,15 +15,24 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 const NavButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
-  color: "black",
+  color: theme.palette.text.dark,
   borderRadius: "32px",
   width: "120px",
   margin: "0 8px",
   fontFamily: theme.typography.textFont,
   fontWeight: 600,
   ":hover": {
-    color: "black",
-    backgroundColor: "white",
+    color: theme.palette.text.dark,
+    backgroundColor: theme.palette.text.light,
+  },
+}));
+
+const DarkMode = styled(DarkModeOutlinedIcon)(({ theme }) => ({
+  fontSize: "36px",
+  color: theme.palette.text.dark,
+  ":hover": {
+    color: theme.palette.text.dark,
+    backgroundColor: theme.palette.text.light,
   },
 }));
 
@@ -53,6 +62,14 @@ const Logo = styled("div")({
   height: "3rem",
 });
 
+const NavIconButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: theme.palette.text.light,
+  ":hover": {
+    color: theme.palette.text.dark,
+    backgroundColor: theme.palette.text.light,
+  },
+}));
+
 const Navbar = () => {
   const theme = useTheme();
   return (
@@ -72,10 +89,9 @@ const Navbar = () => {
               <Link href="/contact">
                 <NavButton>Contact</NavButton>
               </Link>
-              <IconButton size="large" edge="end" color="inherit" aria-label="menu" sx={{ mr: 8 }}>
-                {/* Will be dark mode */}
-                <Logo />
-              </IconButton>
+              <NavIconButton edge="end" color="inherit" aria-label="menu" sx={{ mx: 8 }}>
+                <DarkMode />
+              </NavIconButton>
             </NavRight>
           </NavContainer>
         </Toolbar>

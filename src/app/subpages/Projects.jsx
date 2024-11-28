@@ -25,7 +25,7 @@ const ProjectsContainer = styled("div")(({ theme }) => ({
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   fontFamily: theme.typography.mainFont,
   fontSize: "4rem",
   paddingLeft: "4rem",
@@ -37,7 +37,7 @@ const Title = styled(Typography)(({ theme }) => ({
 }));
 
 const CurrentProjectTitle = styled(Typography)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   WebkitTextStroke: "1px navy",
   fontFamily: theme.typography.mainFont,
   position: "absolute",

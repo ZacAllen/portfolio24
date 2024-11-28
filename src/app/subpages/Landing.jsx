@@ -18,13 +18,14 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
 const TitleContainer = styled("div")({
   display: "flex",
+  width: "100%",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "baseline",
 });
 
 const Title = styled(Typography)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   fontFamily: theme.typography.mainFont,
   fontSize: "6rem",
   paddingLeft: "4rem",
@@ -36,7 +37,7 @@ const Title = styled(Typography)(({ theme }) => ({
 }));
 
 const Subtitle = styled(Typography)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   fontFamily: theme.typography.mainFont,
   fontSize: "3rem",
   paddingLeft: "8rem",
@@ -48,7 +49,7 @@ const Subtitle = styled(Typography)(({ theme }) => ({
 
 const SubHeader = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
-  width: "120%",
+  width: "75%",
   borderRadius: "32px",
   justifyContent: "start",
   alignItems: "center",
@@ -56,6 +57,11 @@ const SubHeader = styled(Box)(({ theme }) => ({
   margin: "2rem 0",
   minHeight: "5rem",
   filter: "drop-shadow(8px 8px 1px black)",
+}));
+
+const SubHeaderText = styled(Typography)(({ theme }) => ({
+  fontFamily: theme.typography.textFont,
+  fontSize: "20px",
 }));
 
 const Landing = ({ isMobile }) => {
@@ -92,7 +98,9 @@ const Landing = ({ isMobile }) => {
                 <Title>Zach Allen</Title>
                 <Subtitle>Front-End Developer</Subtitle>
                 <SubHeader>
-                  <Typography className="p-4">Temporary text until I think of something different.</Typography>
+                  <SubHeaderText className="p-4">
+                    Building smart, performant, & accessible sites worth sharing on the web.
+                  </SubHeaderText>
                 </SubHeader>
               </TitleContainer>
             </Grid>

@@ -6,22 +6,23 @@ import { validateFields } from "@/utils/helpers/contact";
 import { motion } from "motion/react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
-import { Typography, Button, Box, TextField, styled, useTheme } from "@mui/material";
+import { Typography, Button, Box, TextField, IconButton, styled, useTheme } from "@mui/material";
+import { GitHub, LinkedIn } from "@mui/icons-material";
 
 const Title = styled(Typography)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   fontFamily: theme.typography.mainFont,
   fontSize: "4rem",
 }));
 
 const ContactText = styled(Typography)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   fontFamily: theme.typography.textFont,
   fontSize: "2rem",
 }));
 
 const InputText = styled("p")(({ theme }) => ({
-  color: "white",
+  color: theme.palette.text.light,
   fontFamily: theme.typography.textFont,
   fontSize: "1rem",
 }));
@@ -31,18 +32,18 @@ const FormBox = styled(Box)(({ theme }) => ({
     width: "75%",
     "& .MuiInputBase-root": {
       backgroundColor: `${theme.palette.accent.light}0D`,
-      color: "white",
+      color: theme.palette.text.light,
     },
 
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "white",
+        borderColor: theme.palette.text.light,
       },
       "&:hover fieldset": {
-        borderColor: "white",
+        borderColor: theme.palette.text.light,
       },
       "&.Mui-focused fieldset": {
-        borderColor: "white",
+        borderColor: theme.palette.text.light,
       },
     },
   },
@@ -61,7 +62,7 @@ const SubmitButton = styled(Button)(({ theme }) => ({
   fontWeight: 600,
   ":hover": {
     color: "black",
-    backgroundColor: "white",
+    backgroundColor: theme.palette.text.light,
   },
 }));
 
@@ -146,7 +147,25 @@ const Contact = () => {
                 </div>
                 <div style={{ padding: "5%" }}></div>
                 <div className="mt-4">
-                  <ContactText>Or find me on LinkedIn!</ContactText>
+                  <ContactText className="!mb-4">Or, find me on LinkedIn!</ContactText>
+                  <IconButton
+                    target="_blank"
+                    href="https://www.linkedin.com/in/zachsallen/"
+                    disableFocusRipple
+                    disableRipple
+                    sx={{ padding: "0 16px 0 0" }}
+                  >
+                    <LinkedIn sx={{ fontSize: "36px", color: theme.palette.text.light }} />
+                  </IconButton>
+                  <IconButton
+                    href="https://github.com/ZacAllen"
+                    target="_blank"
+                    disableFocusRipple
+                    disableRipple
+                    sx={{ padding: "0 16px 0 0" }}
+                  >
+                    <GitHub sx={{ fontSize: "36px", color: theme.palette.text.light }} />
+                  </IconButton>
                 </div>
               </div>
               <div className="col-span-6">

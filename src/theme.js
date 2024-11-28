@@ -35,6 +35,10 @@ const theme = createTheme({
       analogous: "#3A9E82",
       complement: "#9E743A",
     },
+    text: {
+      light: "#D9D9D9",
+      dark: "#152C38",
+    },
   },
   breakpoints: {
     values: {
