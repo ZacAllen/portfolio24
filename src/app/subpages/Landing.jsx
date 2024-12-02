@@ -1,7 +1,9 @@
 "use client";
+import React, { useContext } from "react";
 import linkedin from "../../../public/assets/img/linkedin.webp";
 import github from "../../../public/assets/img/github.png";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from "@mui/material";
+import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
@@ -24,8 +26,8 @@ const TitleContainer = styled("div")({
   alignItems: "baseline",
 });
 
-const Title = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.light,
+const Title = styled(Typography)(({ theme, darkMode }) => ({
+  color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "6rem",
   paddingLeft: "4rem",
@@ -36,8 +38,8 @@ const Title = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const Subtitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.light,
+const Subtitle = styled(Typography)(({ theme, darkMode }) => ({
+  color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "3rem",
   paddingLeft: "8rem",
@@ -47,8 +49,8 @@ const Subtitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const SubHeader = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.light,
+const SubHeader = styled(Box)(({ theme, darkMode }) => ({
+  backgroundColor: darkMode?.textColor,
   width: "75%",
   borderRadius: "32px",
   justifyContent: "start",
@@ -56,12 +58,13 @@ const SubHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   margin: "2rem 0",
   minHeight: "5rem",
-  filter: "drop-shadow(8px 8px 1px black)",
+  filter: `drop-shadow(8px 8px 1px ${darkMode?.isDarkMode ? "black" : "darkgray"})`,
 }));
 
-const SubHeaderText = styled(Typography)(({ theme }) => ({
+const SubHeaderText = styled(Typography)(({ theme, darkMode }) => ({
   fontFamily: theme.typography.textFont,
   fontSize: "20px",
+  color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
 }));
 
 const Landing = ({ isMobile }) => {
@@ -70,24 +73,27 @@ const Landing = ({ isMobile }) => {
   const description = `Zach is a front-end developer based in Atlanta, GA. In his free time, he enjoys gaming, studying history, taekwondo, and fencing.`;
   const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
   const footerIcons = [github, linkedin];
+  const darkMode = useContext(DarkModeContext);
 
   return (
     <>
       {isMobile ? (
         <StyledBox>
-          <Title>Zach Allen</Title>
-          <Subtitle>Front-End Developer</Subtitle>
+          <Title darkMode={darkMode}>Zach Allen</Title>
+          <Subtitle darkMode={darkMode}>Front-End Developer</Subtitle>
           <Divider sx={{ margin: "20px 0", borderBottomColor: theme.palette.primary.light }} />
-          <MCard
-            title="Zach Allen"
-            image={"./assets/img/Me.jpg"}
-            type="FE Developer - Human Nerd"
-            background={myCardBg}
-            description={description}
-            flavorText={flavorText}
-            footerIcons={footerIcons}
-            footerText={"© 1997"}
-          />
+          <div className="flex justify-center">
+            <MCard
+              title="Zach Allen"
+              image={"./assets/img/Me.jpg"}
+              type="FE Developer - Human Nerd"
+              background={myCardBg}
+              description={description}
+              flavorText={flavorText}
+              footerIcons={footerIcons}
+              footerText={"© 1997"}
+            />
+          </div>
         </StyledBox>
       ) : (
         <LandingContainer>
@@ -95,10 +101,10 @@ const Landing = ({ isMobile }) => {
             <Grid item lg={1}></Grid>
             <Grid item lg={7} className="flex">
               <TitleContainer>
-                <Title>Zach Allen</Title>
-                <Subtitle>Front-End Developer</Subtitle>
-                <SubHeader>
-                  <SubHeaderText className="p-4">
+                <Title darkMode={darkMode}>Zach Allen</Title>
+                <Subtitle darkMode={darkMode}>Front-End Developer</Subtitle>
+                <SubHeader darkMode={darkMode}>
+                  <SubHeaderText className="p-4" darkMode={darkMode}>
                     Building <span style={{ color: theme.palette.accent.complement }}>smart</span>,{" "}
                     <span style={{ color: theme.palette.primary.main }}>performant</span>, &{" "}
                     <span style={{ color: theme.palette.accent.analogous }}>accessible</span> sites worth sharing on the web.

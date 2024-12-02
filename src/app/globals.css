@@ -6,9 +6,6 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: #152c38;
-  /* --background-end-rgb: #3b7a9e; */
-  --background-end-rgb: rgb(39, 64, 78);
 }
 
 html,
@@ -21,13 +18,8 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  /* background: linear-gradient(to bottom, transparent, var(--background-end-rgb)) var(--background-start-rgb); */
-  background: linear-gradient(
-    to bottom,
-    var(--background-start-rgb) 2%,
-    var(--background-end-rgb) 50%,
-    var(--background-start-rgb) 100%
-  );
+  /* !! Use MUI theme vars? Possible? */
+  background: linear-gradient(to bottom, #152c38 2%, #27404e 50%, #152c38 100%);
 }
 
 .swal2-container {

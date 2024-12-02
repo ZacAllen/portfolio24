@@ -1,4 +1,5 @@
 "use client";
+import React, { useEffect, useContext, useState } from "react";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "motion/react";
@@ -8,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import MCard from "../components/MCard";
-import React, { useEffect, useState } from "react";
+import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import { useInView } from "react-intersection-observer";
 
 import linkedin from "../../../public/assets/img/linkedin.webp";
@@ -24,8 +25,8 @@ const ProjectsContainer = styled("div")(({ theme }) => ({
   },
 }));
 
-const Title = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.light,
+const Title = styled(Typography)(({ theme, darkMode }) => ({
+  color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "4rem",
   paddingLeft: "4rem",
@@ -36,8 +37,8 @@ const Title = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const CurrentProjectTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.light,
+const CurrentProjectTitle = styled(Typography)(({ theme, darkMode }) => ({
+  color: darkMode?.textColor,
   WebkitTextStroke: "1px navy",
   fontFamily: theme.typography.mainFont,
   position: "absolute",
@@ -70,18 +71,6 @@ const fan = (rC, tX, tY, pW, pH, triggerAnim) => {
   }  
 `;
   }
-  //   else {
-  //     return keyframes
-  //   0% {
-  //     transform: rotate(${rC}) translateX(${xValue}vw) translateY(${yValue}vh);
-  //     opacity: 1;
-  //   }
-  //   100% {
-  //     transform: rotate(0deg) translate(-50%, 0%);
-  //     opacity: 0;
-  //   }
-  // `;
-  //   }
 };
 
 const animTime = `0.5s`;
@@ -131,8 +120,9 @@ const CardContainer = styled("div", {
 }));
 
 const Projects = ({ isMobile }) => {
+  const darkMode = useContext(DarkModeContext);
+
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
-  const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
   const footerIcons = [github];
   const [triggerAnim, setTriggerAnim] = useState(false);
   const [currentCard, setCurrentCard] = useState("");
@@ -236,7 +226,7 @@ const Projects = ({ isMobile }) => {
 
   return (
     <>
-      <Title>Projects</Title>
+      <Title darkMode={darkMode}>Projects</Title>
       <ProjectsContainer>
         {isMobile ? (
           <div className="w-full mt-8">
@@ -254,7 +244,7 @@ const Projects = ({ isMobile }) => {
         ) : (
           <CardContainer pageHeight={pageHeight} pageWidth={pageWidth} triggerAnim={triggerAnim} ref={ref}>
             {projectCards.map((card) => card)}
-            <CurrentProjectTitle>{currentCard}</CurrentProjectTitle>
+            <CurrentProjectTitle darkMode={darkMode}>{currentCard}</CurrentProjectTitle>
           </CardContainer>
         )}
       </ProjectsContainer>

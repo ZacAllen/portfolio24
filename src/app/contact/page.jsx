@@ -2,6 +2,7 @@
 
 import { useContext, useState, useEffect, useRef, useLayoutEffect } from "react";
 import { MarginContext } from "@/utils/helpers/MarginContext";
+import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import { validateFields } from "@/utils/helpers/contact";
 import { motion } from "motion/react";
 import emailjs from "@emailjs/browser";
@@ -9,66 +10,68 @@ import Swal from "sweetalert2";
 import { Typography, Button, Box, TextField, IconButton, styled, useTheme } from "@mui/material";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
-const Title = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.light,
-  fontFamily: theme.typography.mainFont,
-  fontSize: "4rem",
-}));
-
-const ContactText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.light,
-  fontFamily: theme.typography.textFont,
-  fontSize: "2rem",
-}));
-
-const InputText = styled("p")(({ theme }) => ({
-  color: theme.palette.text.light,
-  fontFamily: theme.typography.textFont,
-  fontSize: "1rem",
-}));
-
-const FormBox = styled(Box)(({ theme }) => ({
-  "& .MuiTextField-root": {
-    width: "75%",
-    "& .MuiInputBase-root": {
-      backgroundColor: `${theme.palette.accent.light}0D`,
-      color: theme.palette.text.light,
-    },
-
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: theme.palette.text.light,
-      },
-      "&:hover fieldset": {
-        borderColor: theme.palette.text.light,
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: theme.palette.text.light,
-      },
-    },
-  },
-  "& .mui-cgzel9-MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {
-    background: "transparent",
-  },
-}));
-
-const SubmitButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.light,
-  color: "black",
-  borderRadius: "32px",
-  width: "120px",
-  margin: "1rem",
-  fontFamily: theme.typography.textFont,
-  fontWeight: 600,
-  ":hover": {
-    color: "black",
-    backgroundColor: theme.palette.text.light,
-  },
-}));
-
 const Field = styled(TextField)(({ theme }) => ({}));
 
 const Contact = () => {
+  const { isDarkMode, textColor, lighttext, darktext } = useContext(DarkModeContext);
+
+  const Title = styled(Typography)(({ theme }) => ({
+    color: textColor,
+    fontFamily: theme.typography.mainFont,
+    fontSize: "4rem",
+  }));
+
+  const ContactText = styled(Typography)(({ theme }) => ({
+    color: textColor,
+    fontFamily: theme.typography.textFont,
+    fontSize: "2rem",
+  }));
+
+  const InputText = styled("p")(({ theme }) => ({
+    color: textColor,
+    fontFamily: theme.typography.textFont,
+    fontSize: "1rem",
+  }));
+
+  const FormBox = styled(Box)(({ theme }) => ({
+    "& .MuiTextField-root": {
+      width: "75%",
+      "& .MuiInputBase-root": {
+        backgroundColor: `${textColor}0D`,
+        color: textColor,
+      },
+
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: textColor,
+        },
+        "&:hover fieldset": {
+          borderColor: textColor,
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: textColor,
+        },
+      },
+    },
+    "& .mui-cgzel9-MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {
+      background: "transparent",
+    },
+  }));
+
+  const SubmitButton = styled(Button)(({ theme }) => ({
+    backgroundColor: textColor,
+    color: isDarkMode ? darktext : lighttext,
+    borderRadius: "32px",
+    width: "120px",
+    margin: "1rem",
+    fontFamily: theme.typography.textFont,
+    fontWeight: 600,
+    ":hover": {
+      color: isDarkMode ? darktext : lighttext,
+      backgroundColor: textColor,
+    },
+  }));
+
   const theme = useTheme();
   const [margins, setMargins] = useContext(MarginContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -155,7 +158,7 @@ const Contact = () => {
                     disableRipple
                     sx={{ padding: "0 16px 0 0" }}
                   >
-                    <LinkedIn sx={{ fontSize: "36px", color: theme.palette.text.light }} />
+                    <LinkedIn sx={{ fontSize: "36px", color: textColor }} />
                   </IconButton>
                   <IconButton
                     href="https://github.com/ZacAllen"
@@ -164,7 +167,7 @@ const Contact = () => {
                     disableRipple
                     sx={{ padding: "0 16px 0 0" }}
                   >
-                    <GitHub sx={{ fontSize: "36px", color: theme.palette.text.light }} />
+                    <GitHub sx={{ fontSize: "36px", color: textColor }} />
                   </IconButton>
                 </div>
               </div>

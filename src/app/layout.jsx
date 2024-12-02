@@ -1,7 +1,6 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import AppContainer from "./AppContainer";
 import { createTheme, ThemeProvider } from "@mui/material";
-import Navbar from "./components/Navbar";
-import Margin from "./components/Margin";
 import theme from "@/theme";
 import "./globals.css";
 
@@ -10,15 +9,15 @@ export const metadata = {
   description: "Zach Allen Portfolio created in NextJs",
 };
 
+/* Layout contains all components of website pages denoted as children */
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
           <body>
-            <Navbar />
-            {/* Define consistent margin for all children of Layout */}
-            <Margin children={children} />
+            <link rel="stylesheet" href="./globals.css" />
+            <AppContainer children={children} />
           </body>
         </ThemeProvider>
       </AppRouterCacheProvider>

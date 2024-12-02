@@ -18,7 +18,14 @@ const text = Jaldi({
   display: "swap",
 });
 
+const dark = "#152C38";
+const light = "#D9D9D9";
+const middle = "#27404e";
+const analogous = "#3A9E82";
+const midLight = "#a6c9bf";
+
 const theme = createTheme({
+  cssVariables: true,
   typography: {
     mainFont: main.style.fontFamily,
     textFont: text.style.fontFamily,
@@ -27,18 +34,34 @@ const theme = createTheme({
     primary: {
       light: "#D9D9D9",
       main: "#3B7A9E",
-      dark: "#152C38",
+      middle: middle,
+      dark: dark,
     },
     accent: {
       light: "#E6F0E5",
+      midLight: midLight,
       medium: "#C4C8BC",
-      analogous: "#3A9E82",
+      analogous: analogous,
       complement: "#9E743A",
     },
     text: {
       light: "#D9D9D9",
       dark: "#152C38",
     },
+  },
+  background: {
+    dark: `linear-gradient(
+    to bottom,
+    ${dark} 2%,
+    ${middle} 50%,
+    ${dark} 100%
+  )`,
+    light: `linear-gradient(
+    to bottom,
+    ${midLight} 2%,
+    ${light} 30%,
+    ${midLight} 95%
+  )`,
   },
   breakpoints: {
     values: {
