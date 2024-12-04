@@ -7,8 +7,8 @@ import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
-  minHeight: "80vh",
-  // marginBottom: "10.625rem",
+  // minHeight: "80vh",
+  margin: "10.625rem 0",
   display: "flex",
   alignItems: "center",
 }));

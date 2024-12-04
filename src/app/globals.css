@@ -36,6 +36,14 @@ body {
   box-shadow: 10px 8px black;
 }
 
+.swiper-transition {
+  .swiper-wrapper {
+    -webkit-transition-timing-function: linear;
+    -o-transition-timing-function: linear;
+    transition-timing-function: linear;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

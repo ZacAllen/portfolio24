@@ -29,7 +29,6 @@ const Title = styled(Typography)(({ theme, darkMode }) => ({
   color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "4rem",
-  paddingLeft: "4rem",
   lineHeight: "0.75",
   [theme.breakpoints.down("sm")]: {
     padding: 0,

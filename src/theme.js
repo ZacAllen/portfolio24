@@ -21,6 +21,7 @@ const text = Jaldi({
 const dark = "#152C38";
 const light = "#D9D9D9";
 const middle = "#27404e";
+const medium = "#C4C8BC";
 const analogous = "#3A9E82";
 const midLight = "#a6c9bf";
 
@@ -40,7 +41,7 @@ const theme = createTheme({
     accent: {
       light: "#E6F0E5",
       midLight: midLight,
-      medium: "#C4C8BC",
+      medium: medium,
       analogous: analogous,
       complement: "#9E743A",
     },
@@ -59,7 +60,7 @@ const theme = createTheme({
     light: `linear-gradient(
     to bottom,
     ${midLight} 2%,
-    ${light} 30%,
+    ${medium} 30%,
     ${midLight} 95%
   )`,
   },

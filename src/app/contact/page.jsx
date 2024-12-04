@@ -82,7 +82,7 @@ const Contact = () => {
   }, []);
 
   const formPlaceHolderStyles = {
-    color: theme.palette.primary.dark,
+    color: textColor,
     fontFamily: theme.typography.textFont,
     fontSize: "1.2rem",
   };

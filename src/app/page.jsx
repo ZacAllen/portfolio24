@@ -4,6 +4,7 @@ import { useTheme, Grid, styled, Typography, useMediaQuery, Box } from "@mui/mat
 import { MarginContext } from "@/utils/helpers/MarginContext";
 import Projects from "./subpages/Projects";
 import Landing from "./subpages/Landing";
+import Tools from "./subpages/Tools";
 
 const Home = () => {
   const theme = useTheme();
@@ -18,6 +19,9 @@ const Home = () => {
     <>
       <div>
         <Landing isMobile={isMobile} />
+      </div>
+      <div>
+        <Tools />
       </div>
       <div>
         <Projects isMobile={isMobile} />
