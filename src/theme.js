@@ -20,7 +20,7 @@ const text = Jaldi({
 
 const dark = "#152C38";
 const light = "#D9D9D9";
-const middle = "#27404e";
+const middle = "#375668";
 const medium = "#C4C8BC";
 const analogous = "#3A9E82";
 const midLight = "#a6c9bf";

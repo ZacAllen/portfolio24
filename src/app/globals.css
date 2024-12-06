@@ -19,7 +19,7 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   /* !! Use MUI theme vars? Possible? */
-  background: linear-gradient(to bottom, #152c38 2%, #27404e 50%, #152c38 100%);
+  background: linear-gradient(to bottom, #152c38 2%, #375668 50%, #152c38 100%);
 }
 
 .swal2-container {

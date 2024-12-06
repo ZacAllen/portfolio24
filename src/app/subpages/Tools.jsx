@@ -25,35 +25,61 @@ import {
 } from "../../utils/helpers/skillsConfig";
 import { Autoplay, EffectFade } from "swiper/modules";
 
-const SliderImage = styled(Image)({});
-
-const createSlides = (key) => {
-  let imgArray = [];
-  if (key === "languages") {
-    imgArray = [JavaScript, TypeScript, HTML5, CSS3, Java, Processing, p5js];
-  } else if (key === "frameworks") {
-    imgArray = [Git, ReactImg, NextJS, Node, Tailwind, Bootstrap, Gatsby, Mui, Jira, Growthbook];
-  }
-  console.log(imgArray);
-  return imgArray.map((img) => (
-    <SwiperSlide>
-      <SliderImage
-        src={img}
-        height={0}
-        width={0}
-        alt=""
-        style={{
-          maxWidth: "80%",
-          maxHeight: "75px",
-          width: "auto",
-        }}
-      ></SliderImage>
-    </SwiperSlide>
-  ));
-};
-
 const Tools = ({ isMobile }) => {
   const { isDarkMode, textColor, lighttext, darktext } = useContext(DarkModeContext);
+
+  const SliderImage = styled(Image)({});
+
+  const SlideText = styled(Typography)(({ theme }) => ({
+    fontFamily: theme.typography.textFont,
+    fontSize: "1.5rem",
+    marginTop: "1rem",
+    color: textColor,
+  }));
+
+  const createSlides = (key) => {
+    let imgArray = [];
+    if (key === "languages") {
+      imgArray = [
+        { name: "JavaScript", url: JavaScript },
+        { name: "TypeScript", url: TypeScript },
+        { name: "HTML5", url: HTML5 },
+        { name: "CSS3", url: CSS3 },
+        { name: "Java", url: Java },
+        { name: "Processing", url: Processing },
+        { name: "p5js", url: p5js },
+      ];
+    } else if (key === "frameworks") {
+      imgArray = [
+        { name: "git", url: Git },
+        { name: "React", url: ReactImg },
+        { name: "NextJS", url: NextJS },
+        { name: "Node", url: Node },
+        { name: "TailwindCSS", url: Tailwind },
+        { name: "Bootstrap", url: Bootstrap },
+        { name: "Gatsby", url: Gatsby },
+        { name: "Material UI", url: Mui },
+        { name: "Jira", url: Jira },
+        { name: "Growthbook", url: Growthbook },
+      ];
+    }
+    return imgArray.map((img) => (
+      <SwiperSlide className="!flex flex-col justify-center items-center">
+        <SliderImage
+          src={img.url}
+          height={0}
+          width={0}
+          alt=""
+          style={{
+            maxWidth: "80%",
+            maxHeight: "75px",
+            width: "auto",
+          }}
+        ></SliderImage>
+        <SlideText>{img.name}</SlideText>
+      </SwiperSlide>
+    ));
+  };
 
   const ToolsTitle = styled(Typography)(({ theme }) => ({
     fontFamily: theme.typography.mainFont,
