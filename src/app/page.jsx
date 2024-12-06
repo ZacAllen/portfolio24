@@ -8,7 +8,7 @@ import Tools from "./subpages/Tools";
 
 const Home = () => {
   const theme = useTheme();
-  // Transition isMobile to use context? Mobile-ness MUST be determined server side
+  //TODO Transition isMobile to use context? Mobile-ness MUST be determined server side
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [margins, setMargins] = useContext(MarginContext);
   useLayoutEffect(() => {
@@ -21,7 +21,7 @@ const Home = () => {
         <Landing isMobile={isMobile} />
       </div>
       <div>
-        <Tools />
+        <Tools isMobile={isMobile} />
       </div>
       <div>
         <Projects isMobile={isMobile} />

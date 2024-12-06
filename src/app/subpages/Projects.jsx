@@ -3,7 +3,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "motion/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, EffectCards, Pagination, Scrollbar, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -22,6 +22,15 @@ const ProjectsContainer = styled("div")(({ theme }) => ({
   alignItems: "center",
   [theme.breakpoints.down("md")]: {
     alignItems: "baseline",
+  },
+  "& .swiper-3d .swiper-slide-shadow": {
+    background: "none !important",
+  },
+  "& .swiper-pagination": {
+    bottom: "-10% !important",
+  },
+  "& .swiper-pagination-bullet-active": {
+    background: theme.palette.primary.main,
   },
 }));
 
@@ -43,6 +52,14 @@ const CurrentProjectTitle = styled(Typography)(({ theme, darkMode }) => ({
   position: "absolute",
   top: "22rem",
   fontSize: "2.5rem",
+}));
+
+const StyledSwiper = styled(Swiper)(({ theme }) => ({
+  maxWidth: "380px",
+  overflow: "visible",
+  [theme.breakpoints.down("sm")]: {
+    marginLeft: "10%",
+  },
 }));
 
 /**
@@ -139,7 +156,7 @@ const Projects = ({ isMobile }) => {
   const pageHeight = 1080;
   const projectCards = [
     <div className={!isMobile && "mCard"}>
-      <motion.div whileHover={{ scale: 1.1 }}>
+      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
           isGroup
@@ -154,41 +171,8 @@ const Projects = ({ isMobile }) => {
         />
       </motion.div>
     </div>,
-
     <div className={!isMobile && "mCard"}>
-      <motion.div whileHover={{ scale: 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="Numberle"
-          image={"./assets/img/numberle.png"}
-          type="ReactJS, Netlify"
-          background={`linear-gradient(to bottom, #38b24a, #cbbf55);`}
-          description={"A parody of the popular puzzle game Wordle, made in React and hosted with Netlify."}
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 2022"}
-        />
-      </motion.div>
-    </div>,
-    <div className={!isMobile && "mCard"}>
-      <motion.div whileHover={{ scale: 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="Portfolio Website"
-          image={"./assets/img/Me.jpg"}
-          type="Next.js, ---"
-          background={myCardBg}
-          description={"Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text "}
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 2024"}
-        />
-      </motion.div>
-    </div>,
-    <div className={!isMobile && "mCard"}>
-      <motion.div whileHover={{ scale: 1.1 }}>
+      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
           isGroup
@@ -206,7 +190,39 @@ const Projects = ({ isMobile }) => {
       </motion.div>
     </div>,
     <div className={!isMobile && "mCard"}>
-      <motion.div whileHover={{ scale: 1.1 }}>
+      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
+        <MCard
+          setCurrentCard={setCurrentCard}
+          isGroup
+          title="Portfolio Website"
+          image={"./assets/img/Me.jpg"}
+          type="Next.js, ---"
+          background={myCardBg}
+          description={"Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text "}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 2024"}
+        />
+      </motion.div>
+    </div>,
+    <div className={!isMobile && "mCard"}>
+      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
+        <MCard
+          setCurrentCard={setCurrentCard}
+          isGroup
+          title="Numberle"
+          image={"./assets/img/numberle.png"}
+          type="ReactJS, Netlify"
+          background={`linear-gradient(to bottom, #38b24a, #cbbf55);`}
+          description={"A parody of the popular puzzle game Wordle, made in React and hosted with Netlify."}
+          // flavorText={flavorText}
+          footerIcons={footerIcons}
+          footerText={"© 2022"}
+        />
+      </motion.div>
+    </div>,
+    <div className={!isMobile && "mCard"}>
+      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
           isGroup
@@ -229,16 +245,16 @@ const Projects = ({ isMobile }) => {
       <ProjectsContainer>
         {isMobile ? (
           <div className="w-full mt-8">
-            <Swiper
-              spaceBetween={20}
-              slidesPerView={isTablet ? 2.2 : 1.2}
-              modules={[Navigation, Pagination, Scrollbar, A11y]}
-              direction="horizontal"
+            <StyledSwiper
+              effect={"cards"}
+              pagination={true}
+              grabCursor={true}
+              modules={[EffectCards, Navigation, Pagination, A11y]}
             >
               {projectCards.map((card) => (
                 <SwiperSlide>{card}</SwiperSlide>
               ))}
-            </Swiper>
+            </StyledSwiper>
           </div>
         ) : (
           <CardContainer pageHeight={pageHeight} pageWidth={pageWidth} triggerAnim={triggerAnim} ref={ref}>

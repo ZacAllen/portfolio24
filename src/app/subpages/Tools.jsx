@@ -64,12 +64,19 @@ const Tools = ({ isMobile }) => {
     fontFamily: theme.typography.mainFont,
     color: textColor,
     fontSize: "1.5rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+      margin: 0,
+    },
     margin: "0 0 0 2rem",
   }));
   const Languages = styled(Typography)(({ theme }) => ({
     fontFamily: theme.typography.mainFont,
     color: textColor,
     fontSize: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+    },
     cursor: "pointer",
   }));
 
@@ -90,12 +97,12 @@ const Tools = ({ isMobile }) => {
         <StyledSwiper
           className="swiper-transition"
           freeMode={true}
-          slidesPerView={6}
+          slidesPerView={isMobile ? 3 : 6}
           direction="horizontal"
           modules={[Autoplay]}
           autoplay={{
             delay: 0,
-            disableOnInteraction: false,
+            disableOnInteraction: false, //! May have to change this for accessibility
           }}
           speed={1800}
           loop={true}
@@ -110,7 +117,7 @@ const Tools = ({ isMobile }) => {
         <StyledSwiper
           className="swiper-transition"
           freeMode={true}
-          slidesPerView={7}
+          slidesPerView={isMobile ? 3 : 7}
           direction="horizontal"
           modules={[Autoplay]}
           autoplay={{
