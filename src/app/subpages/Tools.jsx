@@ -23,7 +23,7 @@ import {
   Growthbook,
   HTML5,
 } from "../../utils/helpers/skillsConfig";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 
 const SliderImage = styled(Image)({});
 
@@ -37,7 +37,17 @@ const createSlides = (key) => {
   console.log(imgArray);
   return imgArray.map((img) => (
     <SwiperSlide>
-      <SliderImage src={img} height={100} alt=""></SliderImage>
+      <SliderImage
+        src={img}
+        height={0}
+        width={0}
+        alt=""
+        style={{
+          maxWidth: "80%",
+          maxHeight: "75px",
+          width: "auto",
+        }}
+      ></SliderImage>
     </SwiperSlide>
   ));
 };
@@ -60,10 +70,15 @@ const Tools = ({ isMobile }) => {
     fontFamily: theme.typography.mainFont,
     color: textColor,
     fontSize: "2rem",
+    cursor: "pointer",
+  }));
+
+  const StyledSwiper = styled(Swiper)(({ theme }) => ({
+    maskImage: `linear-gradient(90deg, transparent 1%, black 5%, black 95%, transparent 99%)`,
   }));
 
   return (
-    <div className="">
+    <div className="my-32">
       <div className="mb-16">
         <ToolsTitle>My Tools</ToolsTitle>
         <Tooltip className="">* Click for list view</Tooltip>
@@ -71,9 +86,11 @@ const Tools = ({ isMobile }) => {
       <div className="mb-2">
         <Languages>Programming Languages *</Languages>
       </div>
-      <div>
-        <Swiper
-          slidesPerView={5}
+      <div className="relative mb-16">
+        <StyledSwiper
+          className="swiper-transition"
+          freeMode={true}
+          slidesPerView={6}
           direction="horizontal"
           modules={[Autoplay]}
           autoplay={{
@@ -84,14 +101,16 @@ const Tools = ({ isMobile }) => {
           loop={true}
         >
           {createSlides("languages")}
-        </Swiper>
+        </StyledSwiper>
       </div>
       <div className="mb-2">
         <Languages>Tools & Frameworks *</Languages>
       </div>
-      <div>
-        <Swiper
-          slidesPerView={5}
+      <div className="relative mb-16">
+        <StyledSwiper
+          className="swiper-transition"
+          freeMode={true}
+          slidesPerView={7}
           direction="horizontal"
           modules={[Autoplay]}
           autoplay={{
@@ -100,10 +119,10 @@ const Tools = ({ isMobile }) => {
             disableOnInteraction: false,
           }}
           speed={1800}
-          loop={true} // Loop the slides
+          loop={true}
         >
           {createSlides("frameworks")}
-        </Swiper>
+        </StyledSwiper>
       </div>
     </div>
   );

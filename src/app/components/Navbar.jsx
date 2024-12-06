@@ -11,7 +11,7 @@ import Link from "next/link";
 const StyledAppBar = styled(AppBar)(({ theme, darkMode }) => ({
   // backgroundColor: "transparent",
   boxShadow: "none",
-  zIndex: 2,
+  zIndex: 3,
   background: `linear-gradient(to bottom, ${
     darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
   } 50%, transparent) `,
