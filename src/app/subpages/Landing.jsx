@@ -8,7 +8,8 @@ import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
   // minHeight: "80vh",
-  margin: "10.625rem 0",
+  // margin: "8rem 0 6rem 0",
+  marginTop: "8rem",
   display: "flex",
   alignItems: "center",
 }));
@@ -97,7 +98,7 @@ const Landing = ({ isMobile }) => {
         </StyledBox>
       ) : (
         <LandingContainer>
-          <Grid container sx={{ height: "40vh", marginBottom: "10.625rem" }}>
+          <Grid container>
             <Grid item lg={1}></Grid>
             <Grid item lg={7} className="flex">
               <TitleContainer>
