@@ -1,99 +1,98 @@
-"use client";
-import React, { useContext, useEffect } from "react";
-import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from "@mui/material";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { useAnimate, motion } from "motion/react";
-import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
-import "./styles.css";
-import Link from "next/link";
+'use client'
+import React, { useContext, useEffect } from 'react'
+import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from '@mui/material'
+import WbSunnyIcon from '@mui/icons-material/WbSunny'
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
+import { useAnimate, motion } from 'motion/react'
+import { DarkModeContext } from '@/utils/helpers/DarkModeContext'
+import './styles.css'
+import Link from 'next/link'
 
 const StyledAppBar = styled(AppBar)(({ theme, darkMode }) => ({
-  // backgroundColor: "transparent",
-  boxShadow: "none",
+  boxShadow: 'none',
   zIndex: 3,
   background: `linear-gradient(to bottom, ${
     darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
   } 50%, transparent) `,
-}));
+}))
 
 const NavButton = styled(Button)(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  border: darkMode?.isDarkMode ? "none" : `2px solid ${darkMode?.textColor}`,
-  borderRadius: "32px",
-  width: "120px",
-  margin: "0 8px",
+  border: darkMode?.isDarkMode ? 'none' : `2px solid ${darkMode?.textColor}`,
+  borderRadius: '32px',
+  width: '120px',
+  margin: '0 8px',
   fontFamily: theme.typography.textFont,
   fontWeight: 600,
-  ":hover": {
+  ':hover': {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-}));
+}))
 
 const DarkMode = styled(DarkModeOutlinedIcon)(({ theme, darkMode }) => ({
-  fontSize: "36px",
+  fontSize: '36px',
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  ":hover": {
+  ':hover': {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-}));
+}))
 
 const LightMode = styled(WbSunnyIcon)(({ theme, darkMode }) => ({
-  fontSize: "36px",
+  fontSize: '36px',
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  ":hover": {
+  ':hover': {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-}));
+}))
 
 const NavContainer = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  width: "100%",
-});
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
+})
 
-const NavLeft = styled("div")({
-  display: "flex",
-  alignItems: "center",
-});
+const NavLeft = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+})
 
-const NavRight = styled("div")({
-  display: "flex",
-  alignItems: "center",
-});
+const NavRight = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+})
 
 /**
  * PLACEHOLDER
  **/
-const Logo = styled("div")({
-  backgroundColor: "#9BA395",
-  borderRadius: "50%",
-  width: "3rem",
-  height: "3rem",
-});
+const Logo = styled('div')({
+  backgroundColor: '#9BA395',
+  borderRadius: '50%',
+  width: '3rem',
+  height: '3rem',
+})
 
 const NavIconButton = styled(IconButton)(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  ":hover": {
+  ':hover': {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
   border: darkMode?.isDarkMode ? `2px solid ${darkMode?.lighttext}` : `2px solid ${darkMode?.textColor}`,
-}));
+}))
 
 const Navbar = () => {
-  const theme = useTheme();
-  const darkMode = useContext(DarkModeContext);
-  const [scope, animate] = useAnimate();
+  const theme = useTheme()
+  const darkMode = useContext(DarkModeContext)
+  const [scope, animate] = useAnimate()
 
   const handleDarkMode = () => {
-    animate(scope.current, { rotate: darkMode.isDarkMode ? 360 : -360 }, { duration: 0.5 });
-    darkMode.handleDarkMode();
-  };
+    animate(scope.current, { rotate: darkMode.isDarkMode ? 360 : -360 }, { duration: 0.5 })
+    darkMode.handleDarkMode()
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -132,7 +131,7 @@ const Navbar = () => {
         </Toolbar>
       </StyledAppBar>
     </Box>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
