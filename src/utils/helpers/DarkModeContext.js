@@ -4,7 +4,6 @@ import theme from "@/theme";
 export const DarkModeContext = createContext();
 
 export const DarkModeContextProvider = ({ children }) => {
-  console.log("*** Context resetting?");
   const lighttext = theme.palette.text.light;
   const darktext = theme.palette.text.dark;
   const lightbg = theme.background.light;
