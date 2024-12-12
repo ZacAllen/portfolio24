@@ -83,13 +83,28 @@ const Tools = ({ isMobile }) => {
 
   const createList = (key) => {
     return (
-      <div className="yo">
-        {imgArray?.[key].map((img) => (
-          <div className="flex items-center flex-row">
-            <div>
-              <Image width={50} src={img?.url} />
-            </div>
-            <SlideText>{img?.name}</SlideText>
+      <div className="grid grid-cols-8 w-[66%]">
+        {imgArray?.[key].map((img, index) => (
+          <div className="grid grid-cols-subgrid col-span-4 my-1" key={index}>
+            {index % 2 === 0 ? (
+              <>
+                <div className="flex items-center">
+                  <Image width={50} src={img?.url} />
+                </div>
+                <div className="ml-4">
+                  <SlideText>{img?.name}</SlideText>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex items-center">
+                  <Image width={50} src={img?.url} />
+                </div>
+                <div className="ml-4">
+                  <SlideText>{img?.name}</SlideText>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>
@@ -128,18 +143,37 @@ const Tools = ({ isMobile }) => {
   const [languagesScope, langaugesAnim] = useAnimate();
   const [toolsScope, toolsAnim] = useAnimate();
   const [showSliderL, setShowSliderL] = useState(true);
-  const [showSliderA, setShowSliderA] = useState(true);
+  const [showSliderT, setShowSliderT] = useState(true);
 
   const handleToolsList = (e) => {
     if (e.target.id === "lang") {
-      langaugesAnim(languagesScope.current, { scale: 0 }, { duration: 0.2 });
-      setTimeout(() => {
-        setShowSliderL(false);
-        langaugesAnim(languagesScope.current, { scale: 1 }, { duration: 0.2 });
-      }, 600);
+      if (showSliderL) {
+        langaugesAnim(languagesScope.current, { scale: 0 }, { duration: 0.2 });
+        setTimeout(() => {
+          setShowSliderL(false);
+          langaugesAnim(languagesScope.current, { scale: 1 }, { duration: 0.2 });
+        }, 200);
+      } else {
+        langaugesAnim(languagesScope.current, { scale: 0 }, { duration: 0.2 });
+        setTimeout(() => {
+          setShowSliderL(true);
+          langaugesAnim(languagesScope.current, { scale: 1 }, { duration: 0.2 });
+        }, 200);
+      }
     } else if (e.target.id === "tool") {
-      toolsAnim(toolsScope.current, { scale: 0 }, { duration: 0.5 });
-      setShowSliderA(false);
+      if (showSliderT) {
+        langaugesAnim(toolsScope.current, { scale: 0 }, { duration: 0.2 });
+        setTimeout(() => {
+          setShowSliderT(false);
+          langaugesAnim(toolsScope.current, { scale: 1 }, { duration: 0.2 });
+        }, 200);
+      } else {
+        langaugesAnim(toolsScope.current, { scale: 0 }, { duration: 0.2 });
+        setTimeout(() => {
+          setShowSliderT(true);
+          langaugesAnim(toolsScope.current, { scale: 1 }, { duration: 0.2 });
+        }, 200);
+      }
     }
   };
 
@@ -188,7 +222,7 @@ const Tools = ({ isMobile }) => {
       </div>
       <div className="relative mb-16">
         <AnimatePresence>
-          {showSliderA ? (
+          {showSliderT ? (
             <motion.div ref={toolsScope}>
               <StyledSwiper
                 className="swiper-transition"

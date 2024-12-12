@@ -119,7 +119,7 @@ const Contact = () => {
             });
           },
           (error) => {
-            console.error("Failed to send email, ", error.text);
+            console.error("Failed to send email, ", error);
           }
         );
     }

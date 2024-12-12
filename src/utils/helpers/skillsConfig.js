@@ -12,7 +12,7 @@ import TypeScript from "../../../public/assets/img/Tools/typescript.png";
 import Bootstrap from "../../../public/assets/img/Tools/bootstrap.png";
 import CSS3 from "../../../public/assets/img/Tools/css3.png";
 import Gatsby from "../../../public/assets/img/Tools/gatsby.png";
-import Git from "../../../public/assets/img/Tools/git.jpg";
+import Git from "../../../public/assets/img/Tools/git.png";
 import Growthbook from "../../../public/assets/img/Tools/growthbook.png";
 import HTML5 from "../../../public/assets/img/Tools/html5.png";
 
