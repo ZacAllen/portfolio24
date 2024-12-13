@@ -13,8 +13,12 @@ export const DarkModeContextProvider = ({ children }) => {
   const [background, setBackground] = useState(darkbg);
   const [textColor, setTextColor] = useState(lighttext);
 
-  const handleDarkMode = () => {
-    setDarkMode(!isDarkMode);
+  const handleDarkMode = (mode) => {
+    if (mode) {
+      setDarkMode(mode === "dark" ? true : false);
+    } else {
+      setDarkMode(!isDarkMode);
+    }
     const body = document.body;
     if (isDarkMode) {
       body.style.background = lightbg;

@@ -155,7 +155,7 @@ const Projects = ({ isMobile }) => {
   const pageWidth = 1920;
   const pageHeight = 1080;
   const projectCards = [
-    <div className={!isMobile && "mCard"}>
+    <div className={!isMobile && "mCard"} key={"Sveltedex"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
@@ -171,7 +171,7 @@ const Projects = ({ isMobile }) => {
         />
       </motion.div>
     </div>,
-    <div className={!isMobile && "mCard"}>
+    <div className={!isMobile && "mCard"} key={"DreamyBot"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
@@ -189,7 +189,7 @@ const Projects = ({ isMobile }) => {
         />
       </motion.div>
     </div>,
-    <div className={!isMobile && "mCard"}>
+    <div className={!isMobile && "mCard"} key={"Portfolio"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
@@ -205,7 +205,7 @@ const Projects = ({ isMobile }) => {
         />
       </motion.div>
     </div>,
-    <div className={!isMobile && "mCard"}>
+    <div className={!isMobile && "mCard"} key={"Numberle"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
@@ -221,14 +221,14 @@ const Projects = ({ isMobile }) => {
         />
       </motion.div>
     </div>,
-    <div className={!isMobile && "mCard"}>
+    <div className={!isMobile && "mCard"} key={"TBD"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
           isGroup
           title="TBD"
           image={"./assets/img/Me.jpg"}
-          type="FE Developer - Human Nerd"
+          type="FE Developer"
           background={`linear-gradient(to bottom, #faed84, #bacee4);`}
           description={"Placeholder text Placeholder text Placeholder text Placeholder text "}
           // flavorText={flavorText}

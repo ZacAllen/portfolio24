@@ -3,10 +3,8 @@
 import { useContext, useState, useEffect, useRef, useLayoutEffect } from "react";
 import { MarginContext } from "@/utils/helpers/MarginContext";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
-import { validateFields } from "@/utils/helpers/contact";
+import { sendEmail, validateFields } from "@/utils/helpers/contact";
 import { motion } from "motion/react";
-import emailjs from "@emailjs/browser";
-import Swal from "sweetalert2";
 import { Typography, Button, Box, TextField, IconButton, styled, useTheme } from "@mui/material";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
@@ -25,6 +23,9 @@ const Contact = () => {
     color: textColor,
     fontFamily: theme.typography.textFont,
     fontSize: "2rem",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.5rem",
+    },
   }));
 
   const InputText = styled("p")(({ theme }) => ({
@@ -36,6 +37,9 @@ const Contact = () => {
   const FormBox = styled(Box)(({ theme }) => ({
     "& .MuiTextField-root": {
       width: "75%",
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+      },
       "& .MuiInputBase-root": {
         backgroundColor: `${textColor}0D`,
         color: textColor,
@@ -89,42 +93,6 @@ const Contact = () => {
 
   const form = useRef();
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    const name = e.target.elements["from_name"].value;
-    const email = e.target.elements["reply_to"].value;
-    const message = e.target.elements["message"].value;
-    const { errormsg, status } = validateFields({ name, email, message });
-    if (!status) {
-      Swal.fire({
-        width: "400px",
-        text: errormsg,
-        confirmButtonText: "Ok",
-        confirmButtonColor: theme.palette.primary.main,
-        backdrop: `rgba(76, 240, 109, 0.1)`,
-      });
-    } else {
-      emailjs
-        .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, form.current, {
-          publicKey: process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID,
-        })
-        .then(
-          () => {
-            Swal.fire({
-              width: "400px",
-              text: "Message sent!",
-              confirmButtonText: "Ok",
-              confirmButtonColor: theme.palette.primary.main,
-              backdrop: `rgba(76, 240, 109, 0.1)`,
-            });
-          },
-          (error) => {
-            console.error("Failed to send email, ", error);
-          }
-        );
-    }
-  };
-
   return (
     <>
       {/* Importing font for swal styling */}
@@ -138,17 +106,17 @@ const Contact = () => {
         href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&family=Londrina+Solid:wght@100;300;400;900&display=swap"
         rel="stylesheet"
       />
-      <div className="w-full h-screen">
+      <div className="w-full md:h-screen h-auto mb-16 md:mb-0">
         <Title className="w-full flex justify-center pt-12">Get In Touch</Title>
         {!isLoading && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
             <div className="grid grid-cols-12 gap-4 mt-12">
-              <div className="col-span-6">
+              <div className="md:col-span-6 col-span-12">
                 <div className="mt-4">
                   <ContactText>Interested in working together?</ContactText>
                   <ContactText>Send me a message and let's connect!</ContactText>
                 </div>
-                <div style={{ padding: "5%" }}></div>
+                <div className="md:flex hidden" style={{ padding: "5%" }}></div>
                 <div className="mt-4">
                   <ContactText className="!mb-4">Or, find me on LinkedIn!</ContactText>
                   <IconButton
@@ -171,7 +139,7 @@ const Contact = () => {
                   </IconButton>
                 </div>
               </div>
-              <div className="col-span-6">
+              <div className="md:col-span-6 col-span-12">
                 <FormBox ref={form} component="form" noValidate autoComplete="off" onSubmit={sendEmail}>
                   <div>
                     <InputText>Full Name</InputText>

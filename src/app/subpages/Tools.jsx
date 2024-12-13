@@ -64,7 +64,7 @@ const Tools = ({ isMobile }) => {
 
   const createSlides = (key) => {
     return imgArray?.[key].map((img) => (
-      <SwiperSlide className="!flex flex-col justify-center items-center">
+      <SwiperSlide className="!flex flex-col justify-center items-center" key={img?.name}>
         <SliderImage
           src={img.url}
           height={0}
@@ -89,18 +89,18 @@ const Tools = ({ isMobile }) => {
             {index % 2 === 0 ? (
               <>
                 <div className="flex items-center">
-                  <Image width={50} src={img?.url} />
+                  <Image width={50} src={img?.url} alt={img?.name} />
                 </div>
-                <div className="ml-4">
+                <div>
                   <SlideText>{img?.name}</SlideText>
                 </div>
               </>
             ) : (
               <>
                 <div className="flex items-center">
-                  <Image width={50} src={img?.url} />
+                  <Image width={50} src={img?.url} alt={img?.name} />
                 </div>
-                <div className="ml-4">
+                <div>
                   <SlideText>{img?.name}</SlideText>
                 </div>
               </>

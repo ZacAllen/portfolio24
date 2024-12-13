@@ -1,137 +1,259 @@
-'use client'
-import React, { useContext, useEffect } from 'react'
-import { styled, AppBar, Box, Toolbar, Typography, Button, IconButton, useTheme } from '@mui/material'
-import WbSunnyIcon from '@mui/icons-material/WbSunny'
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
-import { useAnimate, motion } from 'motion/react'
-import { DarkModeContext } from '@/utils/helpers/DarkModeContext'
-import './styles.css'
-import Link from 'next/link'
+"use client";
+import React, { useContext, useState, useEffect } from "react";
+// import { isMobile } from "react-device-detect";
+import {
+  styled,
+  Divider,
+  Collapse as MuiCollapse,
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  useTheme,
+} from "@mui/material";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { useAnimate, motion } from "motion/react";
+import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
+import "./styles.css";
+import Link from "next/link";
 
-const StyledAppBar = styled(AppBar)(({ theme, darkMode }) => ({
-  boxShadow: 'none',
+const StyledAppBar = styled(AppBar)(({ theme, darkMode, isExpanded }) => ({
+  boxShadow: "none",
   zIndex: 3,
   background: `linear-gradient(to bottom, ${
     darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
   } 50%, transparent) `,
-}))
+  [theme.breakpoints.down("md")]: {
+    background: `linear-gradient(to bottom, ${
+      darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
+    } ${isExpanded ? "90%" : "30%"}, transparent) `,
+    "& .MuiToolbar-root": {
+      background: `linear-gradient(to bottom, ${
+        darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
+      } ${isExpanded ? "90%" : "30%"}, transparent) `,
+    },
+  },
+}));
+
+const Collapse = styled(MuiCollapse)(({ theme }) => ({
+  paddingBottom: "2rem",
+}));
 
 const NavButton = styled(Button)(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  border: darkMode?.isDarkMode ? 'none' : `2px solid ${darkMode?.textColor}`,
-  borderRadius: '32px',
-  width: '120px',
-  margin: '0 8px',
+  border: darkMode?.isDarkMode ? "none" : `2px solid ${darkMode?.textColor}`,
+  borderRadius: "32px",
+  width: "120px",
+  margin: "0 8px",
   fontFamily: theme.typography.textFont,
   fontWeight: 600,
-  ':hover': {
+  ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-}))
+}));
+
+const MobileLink = styled(Typography)(({ theme, darkMode }) => ({
+  fontFamily: theme.typography.textFont,
+  fontSize: "1.5rem",
+  marginTop: "1rem",
+  color: darkMode.textColor,
+}));
 
 const DarkMode = styled(DarkModeOutlinedIcon)(({ theme, darkMode }) => ({
-  fontSize: '36px',
+  fontSize: "36px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  ':hover': {
+  ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-}))
+}));
 
 const LightMode = styled(WbSunnyIcon)(({ theme, darkMode }) => ({
-  fontSize: '36px',
+  fontSize: "36px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  ':hover': {
+  ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-}))
+}));
 
 const NavContainer = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  width: '100%',
-})
+  display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+});
 
-const NavLeft = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-})
+const NavLeft = styled("div")({
+  display: "flex",
+  alignItems: "center",
+});
 
-const NavRight = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-})
+const NavRight = styled("div")({
+  display: "flex",
+  alignItems: "center",
+});
 
 /**
  * PLACEHOLDER
  **/
-const Logo = styled('div')({
-  backgroundColor: '#9BA395',
-  borderRadius: '50%',
-  width: '3rem',
-  height: '3rem',
-})
+const Logo = styled("div")({
+  backgroundColor: "#9BA395",
+  borderRadius: "50%",
+  width: "3rem",
+  height: "3rem",
+});
 
 const NavIconButton = styled(IconButton)(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  ':hover': {
+  ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
   border: darkMode?.isDarkMode ? `2px solid ${darkMode?.lighttext}` : `2px solid ${darkMode?.textColor}`,
-}))
+}));
 
-const Navbar = () => {
-  const theme = useTheme()
-  const darkMode = useContext(DarkModeContext)
-  const [scope, animate] = useAnimate()
+const MobileIconButton = styled(Button)(({ theme, darkMode }) => ({
+  backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
+  ":hover": {
+    color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
+    backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
+  },
+  border: darkMode?.isDarkMode ? `2px solid ${darkMode?.lighttext}` : `2px solid ${darkMode?.textColor}`,
+}));
+
+const Navbar = ({ isMobile }) => {
+  const theme = useTheme();
+  const darkMode = useContext(DarkModeContext);
+  const [scope, animate] = useAnimate();
+  const [isExpanded, setExpanded] = useState(false);
 
   const handleDarkMode = () => {
-    animate(scope.current, { rotate: darkMode.isDarkMode ? 360 : -360 }, { duration: 0.5 })
-    darkMode.handleDarkMode()
-  }
+    animate(scope.current, { rotate: darkMode.isDarkMode ? 360 : -360 }, { duration: 0.5 });
+    darkMode.handleDarkMode();
+  };
+
+  const handleDarkModeMobile = (mode) => {
+    if ((mode === "dark" && darkMode?.isDarkMode) || (mode === "light" && !darkMode?.isDarkMode)) return null;
+    darkMode.handleDarkMode(mode);
+  };
+
+  const handleMenuExpand = (state) => {
+    setExpanded(!state);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <StyledAppBar position="fixed" darkMode={darkMode}>
-        <Toolbar className="navbar">
-          <NavContainer>
-            <NavLeft>
-              <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 8 }}>
-                <Logo />
-              </IconButton>
-              <Link href="/">
-                <NavButton darkMode={darkMode}>Projects</NavButton>
-              </Link>
+      <StyledAppBar position="fixed" darkMode={darkMode} isExpanded={isExpanded}>
+        <Toolbar className={!isMobile && "navbar"}>
+          {!isMobile ? (
+            <NavContainer>
+              <NavLeft>
+                <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
+                  <Logo />
+                </IconButton>
+                <Link href="/">
+                  <NavButton darkMode={darkMode}>Projects</NavButton>
+                </Link>
 
-              <NavButton darkMode={darkMode}>Resume</NavButton>
-              {/* <NavButton>Blog</NavButton> */}
-            </NavLeft>
-            <NavRight>
-              <Link href="/contact">
-                <NavButton darkMode={darkMode}>Contact</NavButton>
-              </Link>
-              <motion.div ref={scope}>
-                <NavIconButton
-                  darkMode={darkMode}
-                  edge="end"
-                  color="inherit"
-                  aria-label="menu"
-                  sx={{ mx: 8 }}
-                  onClick={() => handleDarkMode()}
-                >
-                  {darkMode?.isDarkMode ? <DarkMode darkMode={darkMode} /> : <LightMode darkMode={darkMode} />}
-                </NavIconButton>
-              </motion.div>
-            </NavRight>
-          </NavContainer>
+                <NavButton darkMode={darkMode}>Resume</NavButton>
+              </NavLeft>
+              <NavRight>
+                <Link href="/contact">
+                  <NavButton darkMode={darkMode}>Contact</NavButton>
+                </Link>
+                <motion.div ref={scope}>
+                  <NavIconButton
+                    darkMode={darkMode}
+                    edge="end"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mx: 8 }}
+                    onClick={() => handleDarkMode()}
+                  >
+                    {darkMode?.isDarkMode ? <DarkMode darkMode={darkMode} /> : <LightMode darkMode={darkMode} />}
+                  </NavIconButton>
+                </motion.div>
+              </NavRight>
+            </NavContainer>
+          ) : (
+            <div className="flex flex-col w-screen">
+              <NavContainer>
+                <NavLeft>
+                  <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
+                    <Logo />
+                  </IconButton>
+                </NavLeft>
+                <NavRight>
+                  <IconButton
+                    size="large"
+                    edge="start"
+                    aria-label="menu"
+                    onClick={() => handleMenuExpand(isExpanded)}
+                    sx={{ padding: 0 }}
+                  >
+                    <motion.div ref={scope} className="flex justify-center items-center">
+                      {isExpanded ? (
+                        <CloseIcon style={{ fontSize: "48px", color: darkMode.textColor }} />
+                      ) : (
+                        <MenuIcon style={{ fontSize: "48px", color: darkMode.textColor }} />
+                      )}
+                    </motion.div>
+                  </IconButton>
+                </NavRight>
+              </NavContainer>
+              <Box>
+                <Collapse in={isExpanded} timeout={300}>
+                  <div>
+                    <Link href="/" onClick={() => handleMenuExpand(isExpanded)}>
+                      <MobileLink darkMode={darkMode}>Projects</MobileLink>
+                    </Link>
+                    <Divider />
+                  </div>
+                  <div>
+                    <MobileLink darkMode={darkMode}>Resume</MobileLink>
+                    <Divider />
+                  </div>
+                  <div>
+                    <Link href="/contact" onClick={() => handleMenuExpand(isExpanded)}>
+                      <MobileLink darkMode={darkMode}>Contact</MobileLink>
+                    </Link>
+                    <Divider />
+                  </div>
+                  <div className="flex flex-row my-2 justify-evenly">
+                    <MobileIconButton
+                      darkMode={darkMode}
+                      edge="end"
+                      color="inherit"
+                      aria-label="menu"
+                      onClick={() => handleDarkModeMobile("dark")}
+                    >
+                      <DarkMode darkMode={darkMode} />
+                    </MobileIconButton>
+                    <MobileIconButton
+                      darkMode={darkMode}
+                      edge="end"
+                      color="inherit"
+                      aria-label="menu"
+                      onClick={() => handleDarkModeMobile("light")}
+                    >
+                      <LightMode darkMode={darkMode} />
+                    </MobileIconButton>
+                  </div>
+                </Collapse>
+              </Box>
+            </div>
+          )}
         </Toolbar>
       </StyledAppBar>
     </Box>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

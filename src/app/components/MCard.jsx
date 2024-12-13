@@ -140,7 +140,7 @@ const MCard = ({ title, image, type, description, flavorText, background, footer
           {/* Github/LinkedIn or Project Tech */}
           <div>
             {footerIcons.map((icon) => (
-              <StyledIconButton size="large" edge="end" color="inherit">
+              <StyledIconButton size="large" edge="end" color="inherit" key={`${icon.src}${title}`}>
                 <Image src={icon} width={24} height={24} alt="card_emblem" />
               </StyledIconButton>
             ))}
