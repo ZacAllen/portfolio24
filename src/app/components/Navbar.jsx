@@ -69,6 +69,12 @@ const MobileLink = styled(Typography)(({ theme, darkMode }) => ({
 const DarkMode = styled(DarkModeOutlinedIcon)(({ theme, darkMode }) => ({
   fontSize: "36px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
+  [theme.breakpoints.down("lg")]: {
+    color: darkMode?.isDarkMode ? theme.palette.accent.analogous : darkMode?.lighttext,
+    "&:hover": {
+      color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
+    },
+  },
   ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
@@ -81,6 +87,12 @@ const LightMode = styled(WbSunnyIcon)(({ theme, darkMode }) => ({
   ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
+  },
+  [theme.breakpoints.down("lg")]: {
+    color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
+    "&:hover": {
+      color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
+    },
   },
 }));
 
@@ -125,7 +137,10 @@ const MobileIconButton = styled(Button)(({ theme, darkMode }) => ({
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   },
-  border: darkMode?.isDarkMode ? `2px solid ${darkMode?.lighttext}` : `2px solid ${darkMode?.textColor}`,
+  "&:focus": {
+    color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
+  },
+  width: "40%",
 }));
 
 const Navbar = ({ isMobile }) => {
@@ -226,8 +241,14 @@ const Navbar = ({ isMobile }) => {
                     </Link>
                     <Divider />
                   </div>
-                  <div className="flex flex-row my-2 justify-evenly">
+                  <div className="flex flex-row my-2 justify-center">
                     <MobileIconButton
+                      sx={{
+                        borderRadius: 0,
+                        borderTopLeftRadius: "5px",
+                        borderBottomLeftRadius: "5px",
+                        borderRight: darkMode?.isDarkMode ? `1px solid ${darkMode?.darktext}` : `1px solid ${darkMode?.darktext}`,
+                      }}
                       darkMode={darkMode}
                       edge="end"
                       color="inherit"
@@ -237,6 +258,12 @@ const Navbar = ({ isMobile }) => {
                       <DarkMode darkMode={darkMode} />
                     </MobileIconButton>
                     <MobileIconButton
+                      sx={{
+                        borderRadius: 0,
+                        borderTopRightRadius: "5px",
+                        borderBottomRightRadius: "5px",
+                        borderLeft: darkMode?.isDarkMode ? `1px solid ${darkMode?.darktext}` : `1px solid ${darkMode?.lighttext}`,
+                      }}
                       darkMode={darkMode}
                       edge="end"
                       color="inherit"
