@@ -69,15 +69,15 @@ const MobileLink = styled(Typography)(({ theme, darkMode }) => ({
 const DarkMode = styled(DarkModeOutlinedIcon)(({ theme, darkMode }) => ({
   fontSize: "36px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  [theme.breakpoints.down("lg")]: {
-    color: darkMode?.isDarkMode ? theme.palette.accent.analogous : darkMode?.lighttext,
-    "&:hover": {
-      color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
-    },
-  },
   ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
     backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
+  },
+  [theme.breakpoints.down("lg")]: {
+    color: darkMode?.isDarkMode ? theme.palette.accent.analogous : darkMode?.lighttext,
+    "&:hover": {
+      color: darkMode?.isDarkMode ? theme.palette.accent.analogous : darkMode?.darktext,
+    },
   },
 }));
 
