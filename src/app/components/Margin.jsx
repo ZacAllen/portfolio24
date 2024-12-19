@@ -8,7 +8,7 @@ const Margin = ({ children }) => {
   const [margins, setMargins] = useState({ edges: 1, center: 10 });
   return (
     <MarginContext.Provider value={[margins, setMargins]}>
-      <Grid container sx={{ overflowY: "hidden", paddingTop: "5vh" }}>
+      <Grid container sx={{ overflow: "hidden", paddingTop: "5vh" }}>
         <Grid item sm={margins.edges} xs={1} />
         <Grid item sm={margins.center} xs={10}>
           {children}

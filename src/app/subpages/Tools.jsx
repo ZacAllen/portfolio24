@@ -58,6 +58,9 @@ const Tools = ({ isMobile }) => {
   const SlideText = styled(Typography)(({ theme }) => ({
     fontFamily: theme.typography.textFont,
     fontSize: "1.5rem",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1rem",
+    },
     marginTop: "1rem",
     color: textColor,
   }));
@@ -83,7 +86,7 @@ const Tools = ({ isMobile }) => {
 
   const createList = (key) => {
     return (
-      <div className="grid grid-cols-8 w-[66%]">
+      <div className="grid grid-cols-8 w-full md:w-[66%]">
         {imgArray?.[key].map((img, index) => (
           <div className="grid grid-cols-subgrid col-span-4 my-1" key={index}>
             {index % 2 === 0 ? (
@@ -91,7 +94,7 @@ const Tools = ({ isMobile }) => {
                 <div className="flex items-center">
                   <Image width={50} src={img?.url} alt={img?.name} />
                 </div>
-                <div>
+                <div className="lg:ml-0 ml-4">
                   <SlideText>{img?.name}</SlideText>
                 </div>
               </>
@@ -100,7 +103,7 @@ const Tools = ({ isMobile }) => {
                 <div className="flex items-center">
                   <Image width={50} src={img?.url} alt={img?.name} />
                 </div>
-                <div>
+                <div className="lg:ml-0 ml-4">
                   <SlideText>{img?.name}</SlideText>
                 </div>
               </>

@@ -7,8 +7,6 @@ import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import MCard from "../components/MCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
-  // minHeight: "80vh",
-  // margin: "8rem 0 6rem 0",
   marginTop: "8rem",
   display: "flex",
   alignItems: "center",
@@ -62,6 +60,16 @@ const SubHeader = styled(Box)(({ theme, darkMode }) => ({
   filter: `drop-shadow(8px 8px 1px ${darkMode?.isDarkMode ? "black" : "darkgray"})`,
 }));
 
+const SubHeaderMobile = styled(Box)(({ theme, darkMode }) => ({
+  backgroundColor: darkMode?.textColor,
+  width: "100vw",
+  justifyContent: "start",
+  alignItems: "center",
+  display: "flex",
+  margin: "2rem calc(125% * -1 / var(--Grid-columns))", // Expand to edges of screen, beyond margin
+  minHeight: "5rem",
+}));
+
 const SubHeaderText = styled(Typography)(({ theme, darkMode }) => ({
   fontFamily: theme.typography.textFont,
   fontSize: "20px",
@@ -83,6 +91,14 @@ const Landing = ({ isMobile }) => {
           <Title darkMode={darkMode}>Zach Allen</Title>
           <Subtitle darkMode={darkMode}>Front-End Developer</Subtitle>
           <Divider sx={{ margin: "20px 0", borderBottomColor: theme.palette.primary.light }} />
+          <SubHeaderMobile darkMode={darkMode}>
+            <SubHeaderText className="p-4" darkMode={darkMode}>
+              Building <span style={{ color: theme.palette.accent.complement }}>smart</span>,{" "}
+              <span style={{ color: theme.palette.primary.main }}>performant</span>, &{" "}
+              <span style={{ color: theme.palette.accent.analogous }}>accessible</span> sites worth sharing on the web.
+            </SubHeaderText>
+          </SubHeaderMobile>
+
           <div className="flex justify-center">
             <MCard
               title="Zach Allen"

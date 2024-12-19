@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 // import { isMobile } from "react-device-detect";
 import {
   styled,
-  Divider,
+  Divider as MuiDivider,
   Collapse as MuiCollapse,
   AppBar,
   Box,
@@ -38,10 +38,6 @@ const StyledAppBar = styled(AppBar)(({ theme, darkMode, isExpanded }) => ({
       } ${isExpanded ? "90%" : "30%"}, transparent) `,
     },
   },
-}));
-
-const Collapse = styled(MuiCollapse)(({ theme }) => ({
-  paddingBottom: "2rem",
 }));
 
 const NavButton = styled(Button)(({ theme, darkMode }) => ({
@@ -143,6 +139,10 @@ const MobileIconButton = styled(Button)(({ theme, darkMode }) => ({
   width: "40%",
 }));
 
+const Collapse = styled(MuiCollapse)(({ theme }) => ({
+  paddingBottom: "2rem",
+}));
+
 const Navbar = ({ isMobile }) => {
   const theme = useTheme();
   const darkMode = useContext(DarkModeContext);
@@ -162,6 +162,11 @@ const Navbar = ({ isMobile }) => {
   const handleMenuExpand = (state) => {
     setExpanded(!state);
   };
+
+  const Divider = styled(MuiDivider)(({ theme }) => ({
+    borderColor: darkMode?.textColor,
+    opacity: 0.2,
+  }));
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -224,7 +229,7 @@ const Navbar = ({ isMobile }) => {
                 </NavRight>
               </NavContainer>
               <Box>
-                <Collapse in={isExpanded} timeout={300}>
+                <Collapse in={isExpanded} timeout={300} sx={{ borderTop: isExpanded && `1px solid ${darkMode?.textColor}` }}>
                   <div>
                     <Link href="/" onClick={() => handleMenuExpand(isExpanded)}>
                       <MobileLink darkMode={darkMode}>Projects</MobileLink>
