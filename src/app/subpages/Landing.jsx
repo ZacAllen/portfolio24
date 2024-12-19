@@ -62,11 +62,12 @@ const SubHeader = styled(Box)(({ theme, darkMode }) => ({
 
 const SubHeaderMobile = styled(Box)(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.textColor,
-  width: "100vw",
+  width: "101vw",
   justifyContent: "start",
   alignItems: "center",
   display: "flex",
   margin: "2rem calc(125% * -1 / var(--Grid-columns))", // Expand to edges of screen, beyond margin
+  filter: `drop-shadow(0px 5px 2px ${darkMode?.isDarkMode ? "black" : "darkgray"})`,
   minHeight: "5rem",
 }));
 
