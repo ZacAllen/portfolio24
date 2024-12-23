@@ -2,6 +2,7 @@
 
 import Navbar from "./components/Navbar";
 import Margin from "./components/Margin";
+import Footer from "./components/Footer";
 import { useTheme, useMediaQuery } from "@mui/material";
 import { DarkModeContextProvider } from "@/utils/helpers/DarkModeContext";
 
@@ -14,6 +15,7 @@ const AppContainer = ({ children }) => {
         <Navbar isMobile={isMobile} />
         {/* Define consistent margin for all children of Layout */}
         <Margin children={children} />
+        <Footer isMobile={isMobile} />
       </DarkModeContextProvider>
     </>
   );
