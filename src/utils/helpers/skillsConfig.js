@@ -15,6 +15,7 @@ import Gatsby from "../../../public/assets/img/Tools/gatsby.png";
 import Git from "../../../public/assets/img/Tools/git.png";
 import Growthbook from "../../../public/assets/img/Tools/growthbook.png";
 import HTML5 from "../../../public/assets/img/Tools/html5.png";
+import Strapi from "../../../public/assets/img/Tools/strapi.svg";
 
 export {
   JavaScript,
@@ -34,4 +35,5 @@ export {
   Git,
   Growthbook,
   HTML5,
+  Strapi,
 };

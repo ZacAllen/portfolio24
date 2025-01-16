@@ -23,6 +23,7 @@ import {
   Git,
   Growthbook,
   HTML5,
+  Strapi,
 } from "../../utils/helpers/skillsConfig";
 import { Autoplay, EffectFade } from "swiper/modules";
 
@@ -47,6 +48,7 @@ const imgArray = {
     { name: "Material UI", url: Mui },
     { name: "Jira", url: Jira },
     { name: "Growthbook", url: Growthbook },
+    { name: "Strapi", url: Strapi },
   ],
 };
 
@@ -133,10 +135,14 @@ const Tools = ({ isMobile }) => {
     fontFamily: theme.typography.mainFont,
     color: textColor,
     fontSize: "2rem",
+    display: "inline-block",
     [theme.breakpoints.down("sm")]: {
       fontSize: "1.5rem",
     },
     cursor: "pointer",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   }));
 
   const StyledSwiper = styled(Swiper)(({ theme }) => ({
