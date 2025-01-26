@@ -155,7 +155,7 @@ const Projects = ({ isMobile }) => {
   const pageWidth = 1920;
   const pageHeight = 1080;
   const projectCards = [
-    <div className={!isMobile && "mCard"} key={"Sveltedex"}>
+    <div id="projects" className={!isMobile && "mCard"} key={"Sveltedex"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}

@@ -18,6 +18,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAnimate, motion } from "motion/react";
+import { Link as ScrollTo } from "react-scroll";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import "./styles.css";
 import Link from "next/link";
@@ -171,16 +172,16 @@ const Navbar = ({ isMobile }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <StyledAppBar position="fixed" darkMode={darkMode} isExpanded={isExpanded}>
-        <Toolbar className={!isMobile && "navbar"}>
+        <Toolbar className={!isMobile && (darkMode.isDarkMode ? "navbar-dark" : "navbar")}>
           {!isMobile ? (
             <NavContainer>
               <NavLeft>
                 <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
                   <Logo />
                 </IconButton>
-                <Link href="/">
+                <ScrollTo to="projects" smooth={true} duration={500}>
                   <NavButton darkMode={darkMode}>Projects</NavButton>
-                </Link>
+                </ScrollTo>
 
                 <NavButton darkMode={darkMode}>Resume</NavButton>
               </NavLeft>
@@ -231,9 +232,15 @@ const Navbar = ({ isMobile }) => {
               <Box>
                 <Collapse in={isExpanded} timeout={300} sx={{ borderTop: isExpanded && `1px solid ${darkMode?.textColor}` }}>
                   <div>
-                    <Link href="/" onClick={() => handleMenuExpand(isExpanded)}>
+                    <ScrollTo
+                      to="projects"
+                      smooth={true}
+                      duration={500}
+                      offset={-200}
+                      onClick={() => handleMenuExpand(isExpanded)}
+                    >
                       <MobileLink darkMode={darkMode}>Projects</MobileLink>
-                    </Link>
+                    </ScrollTo>
                     <Divider />
                   </div>
                   <div>

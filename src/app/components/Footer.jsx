@@ -17,7 +17,7 @@ const Footer = ({ isMobile }) => {
         <div className="col-span-1"></div>
         <div className="col-span-10 flex flex-row justify-between">
           <div>
-            <FooterText>Copyright 2025 | Zach Allen</FooterText>
+            <FooterText>Copyright © 2025 | Zach Allen</FooterText>
           </div>
           <div>
             <IconButton
