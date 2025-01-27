@@ -145,7 +145,6 @@ const Collapse = styled(MuiCollapse)(({ theme }) => ({
 }));
 
 const Navbar = ({ isMobile }) => {
-  const theme = useTheme();
   const darkMode = useContext(DarkModeContext);
   const [scope, animate] = useAnimate();
   const [isExpanded, setExpanded] = useState(false);
@@ -179,9 +178,9 @@ const Navbar = ({ isMobile }) => {
                 <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
                   <Logo />
                 </IconButton>
-                <ScrollTo to="projects" smooth={true} duration={500}>
+                <Link href="/#projects">
                   <NavButton darkMode={darkMode}>Projects</NavButton>
-                </ScrollTo>
+                </Link>
 
                 <NavButton darkMode={darkMode}>Resume</NavButton>
               </NavLeft>
@@ -232,15 +231,9 @@ const Navbar = ({ isMobile }) => {
               <Box>
                 <Collapse in={isExpanded} timeout={300} sx={{ borderTop: isExpanded && `1px solid ${darkMode?.textColor}` }}>
                   <div>
-                    <ScrollTo
-                      to="projects"
-                      smooth={true}
-                      duration={500}
-                      offset={-200}
-                      onClick={() => handleMenuExpand(isExpanded)}
-                    >
+                    <Link href={"/#projects"} onClick={() => handleMenuExpand(isExpanded)}>
                       <MobileLink darkMode={darkMode}>Projects</MobileLink>
-                    </ScrollTo>
+                    </Link>
                     <Divider />
                   </div>
                   <div>
