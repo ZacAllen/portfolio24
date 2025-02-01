@@ -12,7 +12,7 @@ const Footer = ({ isMobile }) => {
   }));
 
   return (
-    <div className="w-full bg-transparent border-t-[0.5px] border-x-0 border-b-0 border-gray-500 border-solid h-20">
+    <div className="w-full bg-transparent border-t-[0.5px] border-x-0 border-b-0 border-gray-500 border-solid h-16">
       <div className="grid grid-cols-12 h-full items-center">
         <div className="col-span-1"></div>
         <div className="col-span-10 flex flex-row justify-between">

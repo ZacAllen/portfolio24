@@ -24,6 +24,9 @@ body {
 * {
   scroll-behavior: smooth;
 }
+#projects {
+  scroll-margin-top: 12rem;
+}
 
 .swal2-container {
   padding: 0;
