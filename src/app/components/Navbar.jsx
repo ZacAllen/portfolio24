@@ -23,25 +23,27 @@ import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import "./styles.css";
 import Link from "next/link";
 
-const StyledAppBar = styled(AppBar)(({ theme, darkMode, isExpanded }) => ({
-  boxShadow: "none",
-  zIndex: 3,
-  background: `linear-gradient(to bottom, ${
-    darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
-  } 50%, transparent) `,
-  [theme.breakpoints.down("md")]: {
+const StyledAppBar = styled(AppBar, { shouldForwardProp: (prop) => prop !== "darkMode" && prop !== "isExpanded" })(
+  ({ theme, darkMode, isExpanded }) => ({
+    boxShadow: "none",
+    zIndex: 3,
     background: `linear-gradient(to bottom, ${
       darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
-    } ${isExpanded ? "90%" : "30%"}, transparent) `,
-    "& .MuiToolbar-root": {
+    } 50%, transparent) `,
+    [theme.breakpoints.down("md")]: {
       background: `linear-gradient(to bottom, ${
         darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
       } ${isExpanded ? "90%" : "30%"}, transparent) `,
+      "& .MuiToolbar-root": {
+        background: `linear-gradient(to bottom, ${
+          darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
+        } ${isExpanded ? "90%" : "30%"}, transparent) `,
+      },
     },
-  },
-}));
+  })
+);
 
-const NavButton = styled(Button)(({ theme, darkMode }) => ({
+const NavButton = styled(Button, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
   border: darkMode?.isDarkMode ? "none" : `2px solid ${darkMode?.textColor}`,
@@ -56,14 +58,14 @@ const NavButton = styled(Button)(({ theme, darkMode }) => ({
   },
 }));
 
-const MobileLink = styled(Typography)(({ theme, darkMode }) => ({
+const MobileLink = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   fontFamily: theme.typography.textFont,
   fontSize: "1.5rem",
   marginTop: "1rem",
   color: darkMode.textColor,
 }));
 
-const DarkMode = styled(DarkModeOutlinedIcon)(({ theme, darkMode }) => ({
+const DarkMode = styled(DarkModeOutlinedIcon, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   fontSize: "36px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
   ":hover": {
@@ -78,7 +80,7 @@ const DarkMode = styled(DarkModeOutlinedIcon)(({ theme, darkMode }) => ({
   },
 }));
 
-const LightMode = styled(WbSunnyIcon)(({ theme, darkMode }) => ({
+const LightMode = styled(WbSunnyIcon, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   fontSize: "36px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
   ":hover": {
@@ -119,7 +121,7 @@ const Logo = styled("div")({
   height: "3rem",
 });
 
-const NavIconButton = styled(IconButton)(({ theme, darkMode }) => ({
+const NavIconButton = styled(IconButton, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
@@ -128,7 +130,7 @@ const NavIconButton = styled(IconButton)(({ theme, darkMode }) => ({
   border: darkMode?.isDarkMode ? `2px solid ${darkMode?.lighttext}` : `2px solid ${darkMode?.textColor}`,
 }));
 
-const MobileIconButton = styled(Button)(({ theme, darkMode }) => ({
+const MobileIconButton = styled(Button, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
   ":hover": {
     color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
@@ -140,9 +142,9 @@ const MobileIconButton = styled(Button)(({ theme, darkMode }) => ({
   width: "40%",
 }));
 
-const Collapse = styled(MuiCollapse)(({ theme }) => ({
+const Collapse = styled(MuiCollapse)({
   paddingBottom: "2rem",
-}));
+});
 
 const Navbar = ({ isMobile }) => {
   const darkMode = useContext(DarkModeContext);

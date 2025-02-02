@@ -25,7 +25,7 @@ const TitleContainer = styled("div")({
   alignItems: "baseline",
 });
 
-const Title = styled(Typography)(({ theme, darkMode }) => ({
+const Title = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "6rem",
@@ -37,7 +37,7 @@ const Title = styled(Typography)(({ theme, darkMode }) => ({
   },
 }));
 
-const Subtitle = styled(Typography)(({ theme, darkMode }) => ({
+const Subtitle = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "3rem",
@@ -48,7 +48,7 @@ const Subtitle = styled(Typography)(({ theme, darkMode }) => ({
   },
 }));
 
-const SubHeader = styled(Box)(({ theme, darkMode }) => ({
+const SubHeader = styled(Box, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.textColor,
   width: "75%",
   borderRadius: "32px",
@@ -60,7 +60,7 @@ const SubHeader = styled(Box)(({ theme, darkMode }) => ({
   filter: `drop-shadow(8px 8px 1px ${darkMode?.isDarkMode ? "black" : "darkgray"})`,
 }));
 
-const SubHeaderMobile = styled(Box)(({ theme, darkMode }) => ({
+const SubHeaderMobile = styled(Box, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.textColor,
   width: "101vw",
   justifyContent: "start",
@@ -71,7 +71,7 @@ const SubHeaderMobile = styled(Box)(({ theme, darkMode }) => ({
   minHeight: "5rem",
 }));
 
-const SubHeaderText = styled(Typography)(({ theme, darkMode }) => ({
+const SubHeaderText = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   fontFamily: theme.typography.textFont,
   fontSize: "20px",
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
@@ -116,8 +116,8 @@ const Landing = ({ isMobile }) => {
       ) : (
         <LandingContainer>
           <Grid container>
-            <Grid item lg={1}></Grid>
-            <Grid item lg={7} className="flex">
+            <Grid lg={1}></Grid>
+            <Grid lg={7} className="flex">
               <TitleContainer>
                 <Title darkMode={darkMode}>Zach Allen</Title>
                 <Subtitle darkMode={darkMode}>Front-End Developer</Subtitle>
@@ -130,7 +130,7 @@ const Landing = ({ isMobile }) => {
                 </SubHeader>
               </TitleContainer>
             </Grid>
-            <Grid item lg={3} className="flex">
+            <Grid lg={3} className="flex">
               <MCard
                 title="Zach Allen"
                 image={"./assets/img/Me.jpg"}
@@ -142,7 +142,7 @@ const Landing = ({ isMobile }) => {
                 footerText={"© 1997"}
               />
             </Grid>
-            <Grid item lg={1}></Grid>
+            <Grid lg={1}></Grid>
           </Grid>
         </LandingContainer>
       )}

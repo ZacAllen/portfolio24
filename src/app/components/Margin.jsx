@@ -9,11 +9,11 @@ const Margin = ({ children }) => {
   return (
     <MarginContext.Provider value={[margins, setMargins]}>
       <Grid container sx={{ overflow: "hidden", paddingTop: "5vh" }}>
-        <Grid item sm={margins.edges} xs={1} />
-        <Grid item sm={margins.center} xs={10}>
+        <Grid sm={margins.edges} xs={1} />
+        <Grid sm={margins.center} xs={10}>
           {children}
         </Grid>
-        <Grid item sm={margins.edges} xs={1} />
+        <Grid sm={margins.edges} xs={1} />
       </Grid>
     </MarginContext.Provider>
   );

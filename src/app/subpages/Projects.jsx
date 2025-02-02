@@ -34,7 +34,7 @@ const ProjectsContainer = styled("div")(({ theme }) => ({
   },
 }));
 
-const Title = styled(Typography)(({ theme, darkMode }) => ({
+const Title = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
   fontSize: "4rem",
@@ -45,7 +45,7 @@ const Title = styled(Typography)(({ theme, darkMode }) => ({
   },
 }));
 
-const CurrentProjectTitle = styled(Typography)(({ theme, darkMode }) => ({
+const CurrentProjectTitle = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   color: darkMode?.textColor,
   WebkitTextStroke: "1px navy",
   fontFamily: theme.typography.mainFont,

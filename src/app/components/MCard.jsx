@@ -14,17 +14,19 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
 
-const StyledCard = styled(Card)(({ theme, isGroup }) => ({
+const StyledCard = styled(Card, {
+  shouldForwardProp: (prop) => prop !== "isGroup",
+})(({ theme, isGroup }) => ({
   borderRadius: "10px",
   padding: "10px",
   backgroundColor: "black",
   aspectRatio: "8/13",
   maxWidth: "345px",
-  minWidth: !isGroup ? "300px" : "240px",
-  minHeight: !isGroup && "480px",
+  minWidth: isGroup ? "240px" : "300px",
+  minHeight: isGroup ? undefined : "480px",
   maxHeight: isGroup ? "450px" : "511px",
   [theme.breakpoints.down("md")]: {
-    maxHeight: isGroup && "392px",
+    maxHeight: isGroup ? "392px" : undefined,
   },
 }));
 
@@ -35,7 +37,9 @@ const StyledHeader = styled(CardHeader)(({ theme }) => ({
   backgroundColor: theme.palette.accent.medium,
 }));
 
-const StyledContent = styled(CardContent)(({ theme, isGroup }) => ({
+const StyledContent = styled(CardContent, {
+  shouldForwardProp: (prop) => prop !== "isGroup",
+})(({ theme, isGroup }) => ({
   backgroundColor: theme.palette.accent.light,
   border: "3px solid black",
   padding: "8px",
@@ -59,25 +63,34 @@ const Type = styled(Box)(({ theme }) => ({
   // paddingLeft: "0.5rem",
 }));
 
-const Description = styled(Typography)(({ theme, isGroup }) => ({
+const Description = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "isGroup",
+})(({ theme, isGroup }) => ({
   fontFamily: theme.typography.textFont,
   fontWeight: "600",
   [theme.breakpoints.down("xl")]: {
     fontSize: isGroup && "12px",
   },
 }));
-const FlavorText = styled(Typography)(({ theme, isGroup }) => ({
+
+const FlavorText = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "isGroup",
+})(({ theme, isGroup }) => ({
   fontFamily: theme.typography.textFont,
   fontStyle: "italic",
   [theme.breakpoints.down("md")]: {
     fontSize: isGroup && "12px",
   },
 }));
-const CardColor = styled(Box)(({ theme, background }) => ({
+
+const CardColor = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "background",
+})(({ theme, background }) => ({
   background: background,
   padding: "5px",
   borderRadius: "10px",
 }));
+
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   padding: 0,
   marginRight: "15px",

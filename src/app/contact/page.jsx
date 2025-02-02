@@ -97,11 +97,11 @@ const Contact = () => {
     <>
       {/* Importing font for swal styling */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet" />
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       <link
         href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&family=Londrina+Solid:wght@100;300;400;900&display=swap"
         rel="stylesheet"
