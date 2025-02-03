@@ -19,6 +19,7 @@ const text = Jaldi({
 });
 
 const dark = "#152C38";
+const mainColor = "#3B7A9E";
 const light = "#D9D9D9";
 const middle = "#375668";
 const medium = "#C4C8BC";
@@ -33,8 +34,8 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      light: "#D9D9D9",
-      main: "#3B7A9E",
+      light: light,
+      main: mainColor,
       middle: middle,
       dark: dark,
     },
@@ -46,8 +47,8 @@ const theme = createTheme({
       complement: "#9E743A",
     },
     text: {
-      light: "#D9D9D9",
-      dark: "#152C38",
+      light: light,
+      dark: dark,
     },
   },
   background: {

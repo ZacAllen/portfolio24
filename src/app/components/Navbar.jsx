@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useState, useEffect } from "react";
-// import { isMobile } from "react-device-detect";
+import Image from "next/image";
 import {
   styled,
   Divider as MuiDivider,
@@ -18,8 +18,9 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAnimate, motion } from "motion/react";
-import { Link as ScrollTo } from "react-scroll";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
+import logo from "../../../public/assets/img/logolight.png";
+import logoDark from "../../../public/assets/img/logodark.png";
 import "./styles.css";
 import Link from "next/link";
 
@@ -114,12 +115,7 @@ const NavRight = styled("div")({
 /**
  * PLACEHOLDER
  **/
-const Logo = styled("div")({
-  backgroundColor: "#9BA395",
-  borderRadius: "50%",
-  width: "3rem",
-  height: "3rem",
-});
+const Logo = styled(Image)({});
 
 const NavIconButton = styled(IconButton, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
@@ -177,9 +173,12 @@ const Navbar = ({ isMobile }) => {
           {!isMobile ? (
             <NavContainer>
               <NavLeft>
-                <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
-                  <Logo />
-                </IconButton>
+                <Link href="/">
+                  <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
+                    <Logo src={darkMode?.isDarkMode ? logoDark : logo} width={75} height={75} />
+                  </IconButton>
+                </Link>
+
                 <Link href="/#projects">
                   <NavButton darkMode={darkMode}>Projects</NavButton>
                 </Link>
@@ -208,9 +207,11 @@ const Navbar = ({ isMobile }) => {
             <div className="flex flex-col w-screen">
               <NavContainer>
                 <NavLeft>
-                  <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
-                    <Logo />
-                  </IconButton>
+                  <Link href="/">
+                    <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
+                      <Logo src={darkMode?.isDarkMode ? logoDark : logo} width={50} height={50} />
+                    </IconButton>
+                  </Link>
                 </NavLeft>
                 <NavRight>
                   <IconButton
