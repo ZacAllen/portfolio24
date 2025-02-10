@@ -16,7 +16,7 @@ export const validateFields = ({ name, email, message }) => {
   return { errormsg, status };
 };
 
-export const sendEmail = (e) => {
+export const sendEmail = (e, form) => {
   e.preventDefault();
   const isMobile = window.innerWidth < 640;
   const name = e.target.elements["from_name"].value;

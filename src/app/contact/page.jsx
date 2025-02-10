@@ -140,7 +140,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="md:col-span-6 col-span-12">
-                <FormBox ref={form} component="form" noValidate autoComplete="off" onSubmit={sendEmail}>
+                <FormBox ref={form} component="form" noValidate autoComplete="off" onSubmit={(e) => sendEmail(e, form)}>
                   <div>
                     <InputText>Full Name</InputText>
                     <Field
