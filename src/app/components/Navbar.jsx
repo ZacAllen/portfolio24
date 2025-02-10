@@ -11,8 +11,9 @@ import {
   Typography,
   Button,
   IconButton,
-  useTheme,
 } from "@mui/material";
+import ResumeModal from "./ResumeModal";
+import ZAllenResume from "../../../public/assets/docs/ZAllenResume.pdf";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,39 +26,42 @@ import "./styles.css";
 import Link from "next/link";
 
 const StyledAppBar = styled(AppBar, { shouldForwardProp: (prop) => prop !== "darkMode" && prop !== "isExpanded" })(
-  ({ theme, darkMode, isExpanded }) => ({
-    boxShadow: "none",
-    zIndex: 3,
-    background: `linear-gradient(to bottom, ${
-      darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
-    } 50%, transparent) `,
-    [theme.breakpoints.down("md")]: {
-      background: `linear-gradient(to bottom, ${
-        darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
-      } ${isExpanded ? "90%" : "30%"}, transparent) `,
-      "& .MuiToolbar-root": {
-        background: `linear-gradient(to bottom, ${
-          darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight
-        } ${isExpanded ? "90%" : "30%"}, transparent) `,
+  ({ theme, darkMode, isExpanded }) => {
+    const backgroundColor = darkMode?.isDarkMode ? theme.palette.primary.dark : theme.palette.accent.midLight;
+    const gradientHeight = isExpanded ? "90%" : "30%";
+
+    return {
+      boxShadow: "none",
+      zIndex: 3,
+      background: `linear-gradient(to bottom, ${backgroundColor} 50%, transparent)`,
+      [theme.breakpoints.down("md")]: {
+        background: `linear-gradient(to bottom, ${backgroundColor} ${gradientHeight}, transparent)`,
+        "& .MuiToolbar-root": {
+          background: `linear-gradient(to bottom, ${backgroundColor} ${gradientHeight}, transparent)`,
+        },
       },
-    },
-  })
+      paddingRight: "0 !important",
+    };
+  }
 );
 
-const NavButton = styled(Button, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
-  backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  border: darkMode?.isDarkMode ? "none" : `2px solid ${darkMode?.textColor}`,
-  borderRadius: "32px",
-  width: "120px",
-  margin: "0 8px",
-  fontFamily: theme.typography.textFont,
-  fontWeight: 600,
-  ":hover": {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-    backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  },
-}));
+const NavButton = styled(Button, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => {
+  const { isDarkMode, lighttext, darktext, textColor } = darkMode || {};
+  return {
+    backgroundColor: isDarkMode ? lighttext : darktext,
+    color: isDarkMode ? darktext : lighttext,
+    border: isDarkMode ? "none" : `2px solid ${textColor}`,
+    borderRadius: "32px",
+    width: "120px",
+    margin: "0 8px",
+    fontFamily: theme.typography.textFont,
+    fontWeight: 600,
+    ":hover": {
+      color: isDarkMode ? darktext : lighttext,
+      backgroundColor: isDarkMode ? lighttext : darktext,
+    },
+  };
+});
 
 const MobileLink = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
   fontFamily: theme.typography.textFont,
@@ -66,35 +70,46 @@ const MobileLink = styled(Typography, { shouldForwardProp: (prop) => prop !== "d
   color: darkMode.textColor,
 }));
 
-const DarkMode = styled(DarkModeOutlinedIcon, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
-  fontSize: "36px",
-  color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  ":hover": {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-    backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  },
-  [theme.breakpoints.down("lg")]: {
-    color: darkMode?.isDarkMode ? theme.palette.accent.analogous : darkMode?.lighttext,
-    "&:hover": {
-      color: darkMode?.isDarkMode ? theme.palette.accent.analogous : darkMode?.darktext,
+const DarkMode = styled(DarkModeOutlinedIcon, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => {
+  const { isDarkMode, darktext, lighttext } = darkMode || {};
+  const color = isDarkMode ? darktext : lighttext;
+  return {
+    fontSize: "36px",
+    color: color,
+    ":hover": {
+      color: color,
+      backgroundColor: isDarkMode ? lighttext : darktext,
     },
-  },
-}));
 
-const LightMode = styled(WbSunnyIcon, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
-  fontSize: "36px",
-  color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-  ":hover": {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-    backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  },
-  [theme.breakpoints.down("lg")]: {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
-    "&:hover": {
-      color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
+    [theme.breakpoints.down("lg")]: {
+      color: isDarkMode ? theme.palette.accent.analogous : lighttext,
+      "&:hover": {
+        color: isDarkMode ? theme.palette.accent.analogous : darktext,
+      },
     },
-  },
-}));
+  };
+});
+
+const LightMode = styled(WbSunnyIcon, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => {
+  const { isDarkMode, darktext, lighttext } = darkMode || {};
+  const color = isDarkMode ? darktext : lighttext;
+  return {
+    fontSize: "36px",
+    color: color,
+
+    ":hover": {
+      color: color,
+      backgroundColor: isDarkMode ? lighttext : darktext,
+    },
+
+    [theme.breakpoints.down("lg")]: {
+      color: isDarkMode ? darktext : theme.palette.accent.analogous,
+      "&:hover": {
+        color: isDarkMode ? darktext : theme.palette.accent.analogous,
+      },
+    },
+  };
+});
 
 const NavContainer = styled(Box)({
   display: "flex",
@@ -117,26 +132,33 @@ const NavRight = styled("div")({
  **/
 const Logo = styled(Image)({});
 
-const NavIconButton = styled(IconButton, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
-  backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  ":hover": {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-    backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  },
-  border: darkMode?.isDarkMode ? `2px solid ${darkMode?.lighttext}` : `2px solid ${darkMode?.textColor}`,
-}));
+const NavIconButton = styled(IconButton, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => {
+  const { isDarkMode, lighttext, darktext, textColor } = darkMode || {};
+  const bg = isDarkMode ? lighttext : darktext;
+  return {
+    backgroundColor: bg,
+    ":hover": {
+      color: isDarkMode ? darktext : lighttext,
+      backgroundColor: bg,
+    },
+    border: `2px solid ${isDarkMode ? lighttext : textColor}`,
+  };
+});
 
-const MobileIconButton = styled(Button, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
-  backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  ":hover": {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
-    backgroundColor: darkMode?.isDarkMode ? darkMode?.lighttext : darkMode?.darktext,
-  },
-  "&:focus": {
-    color: darkMode?.isDarkMode ? darkMode?.darktext : theme.palette.accent.analogous,
-  },
-  width: "40%",
-}));
+const MobileIconButton = styled(Button, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => {
+  const { isDarkMode, lighttext, darktext } = darkMode || {};
+  return {
+    backgroundColor: isDarkMode ? lighttext : darktext,
+    ":hover": {
+      color: isDarkMode ? darktext : lighttext,
+      backgroundColor: isDarkMode ? lighttext : darktext,
+    },
+    "&:focus": {
+      color: isDarkMode ? darktext : theme.palette.accent.analogous,
+    },
+    width: "40%",
+  };
+});
 
 const Collapse = styled(MuiCollapse)({
   paddingBottom: "2rem",
@@ -145,11 +167,18 @@ const Collapse = styled(MuiCollapse)({
 const Navbar = ({ isMobile }) => {
   const darkMode = useContext(DarkModeContext);
   const [scope, animate] = useAnimate();
+  const [scopeLogo, animateLogo] = useAnimate();
   const [isExpanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDarkMode = () => {
     animate(scope.current, { rotate: darkMode.isDarkMode ? 360 : -360 }, { duration: 0.5 });
+    handleLogo();
     darkMode.handleDarkMode();
+  };
+
+  const handleLogo = () => {
+    animateLogo(scopeLogo.current, { rotate: darkMode.isDarkMode ? 360 : -360 }, { duration: 0.5 });
   };
 
   const handleDarkModeMobile = (mode) => {
@@ -161,6 +190,14 @@ const Navbar = ({ isMobile }) => {
     setExpanded(!state);
   };
 
+  const showResume = () => {
+    if (isMobile) {
+      window.open(ZAllenResume, "_blank");
+    } else {
+      setOpen(true);
+    }
+  };
+
   const Divider = styled(MuiDivider)(({ theme }) => ({
     borderColor: darkMode?.textColor,
     opacity: 0.2,
@@ -168,22 +205,29 @@ const Navbar = ({ isMobile }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <ResumeModal open={open} setOpen={setOpen} resume={ZAllenResume} />
       <StyledAppBar position="fixed" darkMode={darkMode} isExpanded={isExpanded}>
         <Toolbar className={!isMobile && (darkMode.isDarkMode ? "navbar-dark" : "navbar")}>
           {!isMobile ? (
             <NavContainer>
               <NavLeft>
                 <Link href="/">
-                  <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
-                    <Logo src={darkMode?.isDarkMode ? logoDark : logo} width={75} height={75} />
+                  <IconButton size="large" edge="start" color="inherit" aria-label="home">
+                    <motion.div ref={scopeLogo} style={{ transformOrigin: "center" }}>
+                      <Logo src={darkMode?.isDarkMode ? logoDark : logo} width={75} height={75} alt="Zach Allen Logo" />
+                    </motion.div>
                   </IconButton>
                 </Link>
 
                 <Link href="/#projects">
-                  <NavButton darkMode={darkMode}>Projects</NavButton>
+                  <NavButton darkMode={darkMode} sx={{ ml: 8 }}>
+                    Projects
+                  </NavButton>
                 </Link>
 
-                <NavButton darkMode={darkMode}>Resume</NavButton>
+                <NavButton darkMode={darkMode} onClick={() => showResume()}>
+                  Resume
+                </NavButton>
               </NavLeft>
               <NavRight>
                 <Link href="/contact">
@@ -240,7 +284,9 @@ const Navbar = ({ isMobile }) => {
                     <Divider />
                   </div>
                   <div>
-                    <MobileLink darkMode={darkMode}>Resume</MobileLink>
+                    <MobileLink darkMode={darkMode} onClick={() => showResume()}>
+                      Resume
+                    </MobileLink>
                     <Divider />
                   </div>
                   <div>

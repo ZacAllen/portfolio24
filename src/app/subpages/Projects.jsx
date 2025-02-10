@@ -195,7 +195,7 @@ const Projects = ({ isMobile }) => {
           setCurrentCard={setCurrentCard}
           isGroup
           title="Portfolio Website"
-          image={"./assets/img/Me.jpg"}
+          image={"./assets/img/personal website.png"}
           type="Next.js, ---"
           background={myCardBg}
           description={"Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text "}
