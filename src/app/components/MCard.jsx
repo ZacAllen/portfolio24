@@ -23,10 +23,10 @@ const StyledCard = styled(Card, {
   aspectRatio: "8/13",
   maxWidth: "345px",
   minWidth: isGroup ? "240px" : "300px",
-  minHeight: isGroup ? undefined : "480px",
+  minHeight: isGroup ? null : "480px",
   maxHeight: isGroup ? "450px" : "511px",
   [theme.breakpoints.down("md")]: {
-    maxHeight: isGroup ? "392px" : undefined,
+    maxHeight: isGroup ? "392px" : null,
   },
 }));
 
@@ -101,7 +101,8 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 /**
  * MTG-Based card component for landing and project section.
  *
- * @param {string} title - title of the card.
+ * @param {string} id - id attribute to pass to card wrapper.
+ * @param {string} title - card title.
  * @param {string} image - URL of the card image.
  * @param {string} type - type/category of the card's content.
  * @param {string} description - Main description text for the card.
@@ -113,12 +114,24 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
  * @param {function} setCurrentCard - State setter for currently focused card element
  * @returns The fully styled card component with content and actions.
  */
-const MCard = ({ title, image, type, description, flavorText, background, footerIcons, footerText, isGroup, setCurrentCard }) => {
+const MCard = ({
+  id,
+  title,
+  image,
+  type,
+  description,
+  flavorText,
+  background,
+  footerIcons,
+  footerText,
+  isGroup,
+  setCurrentCard,
+}) => {
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down("xl"));
 
   return (
-    <div onMouseEnter={() => setCurrentCard && setCurrentCard(title)}>
+    <div id={id} onMouseEnter={() => setCurrentCard && setCurrentCard(title)}>
       <StyledCard isGroup={isGroup}>
         <CardColor background={background}>
           <StyledHeader

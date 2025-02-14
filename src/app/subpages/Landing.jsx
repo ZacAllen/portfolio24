@@ -1,10 +1,12 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import linkedin from "../../../public/assets/img/linkedin.webp";
 import github from "../../../public/assets/img/github.png";
+import { useAnimate, motion } from "motion/react";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from "@mui/material";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import MCard from "../components/MCard";
+import CardBackSide from "../components/CardBackSide";
 
 const LandingContainer = styled("div")(({ theme }) => ({
   marginTop: "8rem",
@@ -79,11 +81,31 @@ const SubHeaderText = styled(Typography, { shouldForwardProp: (prop) => prop !==
 
 const Landing = ({ isMobile }) => {
   const theme = useTheme();
+  const [backCardWidth, setBackCardWidth] = useState(0);
+  const [backCardHeight, setBackCardHeight] = useState(0);
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
   const description = `Zach is a front-end developer based in Atlanta, GA. In his free time, he enjoys gaming, studying history, taekwondo, and fencing.`;
-  const flavorText = `”We’re in the round era of web design. I predict by 2026, we’ll enter another angular age.”`;
+  const flavorText = `"We're in the round era of web design. I predict by 2026, we'll enter another angular age."`;
   const footerIcons = [github, linkedin];
   const darkMode = useContext(DarkModeContext);
+
+  useEffect(() => {
+    const card = document?.getElementById("landing-card");
+    if (!card) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setBackCardWidth(entry.contentRect.width);
+        setBackCardHeight(entry.contentRect.height);
+      }
+    });
+
+    resizeObserver.observe(card);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -131,16 +153,52 @@ const Landing = ({ isMobile }) => {
               </TitleContainer>
             </Grid>
             <Grid lg={3} className="flex">
-              <MCard
-                title="Zach Allen"
-                image={"./assets/img/Me.jpg"}
-                type="FE Developer - Human Nerd"
-                background={myCardBg}
-                description={description}
-                flavorText={flavorText}
-                footerIcons={footerIcons}
-                footerText={"© 1997"}
-              />
+              {/* Possible to extract all this animation logic into a component? */}
+              <motion.div
+                animate={{
+                  rotateY: [0, 180, 360],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                }}
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: 1000,
+                  position: "relative",
+                  transformOrigin: "center",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {/* Front side */}
+                <div
+                  style={{
+                    backfaceVisibility: "hidden",
+                    position: "absolute",
+                    width: "100%",
+                    transform: "translateZ(1px)",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MCard
+                    id="landing-card"
+                    title="Zach Allen"
+                    image={"./assets/img/Me.jpg"}
+                    type="FE Developer - Human Nerd"
+                    background={myCardBg}
+                    description={description}
+                    flavorText={flavorText}
+                    footerIcons={footerIcons}
+                    footerText={"© 1997"}
+                  />
+                </div>
+                {/* Back side */}
+                <CardBackSide id="back-card" backCardWidth={backCardWidth} backCardHeight={backCardHeight} />
+              </motion.div>
             </Grid>
             <Grid lg={1}></Grid>
           </Grid>

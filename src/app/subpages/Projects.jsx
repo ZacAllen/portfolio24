@@ -196,9 +196,9 @@ const Projects = ({ isMobile }) => {
           isGroup
           title="Portfolio Website"
           image={"./assets/img/personal website.png"}
-          type="Next.js, ---"
+          type="Next.js, Netlify"
           background={myCardBg}
-          description={"Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text "}
+          description={"This Portfolio Website, created with Next.js and hosted with Netlify."}
           // flavorText={flavorText}
           footerIcons={footerIcons}
           footerText={"© 2024"}
