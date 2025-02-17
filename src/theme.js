@@ -1,6 +1,7 @@
 "use client";
 // Fonts
-import { Roboto, Jaldi, Londrina_Solid } from "next/font/google";
+import { Roboto, Jaldi, Londrina_Solid, Eagle_Lake } from "next/font/google";
+import localFont from "next/font/local";
 
 import { createTheme } from "@mui/material/styles";
 
@@ -18,6 +19,16 @@ const text = Jaldi({
   display: "swap",
 });
 
+const eagleLake = Eagle_Lake({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const magic = localFont({
+  src: "../public/fonts/Belwe-Std-Bold.otf",
+});
+
 const dark = "#152C38";
 const mainColor = "#3B7A9E";
 const light = "#D9D9D9";
@@ -31,6 +42,8 @@ const theme = createTheme({
   typography: {
     mainFont: main.style.fontFamily,
     textFont: text.style.fontFamily,
+    magicFont: magic.style.fontFamily,
+    magicSubFont: eagleLake.style.fontFamily,
   },
   palette: {
     primary: {

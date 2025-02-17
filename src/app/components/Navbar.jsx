@@ -127,9 +127,6 @@ const NavRight = styled("div")({
   alignItems: "center",
 });
 
-/**
- * PLACEHOLDER
- **/
 const Logo = styled(Image)({});
 
 const NavIconButton = styled(IconButton, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => {

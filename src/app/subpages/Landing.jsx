@@ -159,9 +159,9 @@ const Landing = ({ isMobile }) => {
                   rotateY: [0, 180, 360],
                 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 2,
                   repeat: Infinity,
-                  repeatDelay: 2,
+                  repeatDelay: 10,
                 }}
                 style={{
                   transformStyle: "preserve-3d",
@@ -197,7 +197,7 @@ const Landing = ({ isMobile }) => {
                   />
                 </div>
                 {/* Back side */}
-                <CardBackSide id="back-card" backCardWidth={backCardWidth} backCardHeight={backCardHeight} />
+                <CardBackSide title="HTML5" id="back-card" backCardWidth={backCardWidth} backCardHeight={backCardHeight} />
               </motion.div>
             </Grid>
             <Grid lg={1}></Grid>
