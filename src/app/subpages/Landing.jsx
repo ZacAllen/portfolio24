@@ -83,6 +83,17 @@ const Landing = ({ isMobile }) => {
   const theme = useTheme();
   const [backCardWidth, setBackCardWidth] = useState(0);
   const [backCardHeight, setBackCardHeight] = useState(0);
+
+  const cardBackText = [
+    { title: "HTML5", subtitle: "It's not programming?" },
+    { title: "CSS3⠀", subtitle: "Can you center a div?" },
+    { title: "TypeScript", subtitle: "Don't over-cast!" },
+    { title: "JavaScript", subtitle: "Too many frameworks!" },
+    { title: "Java⠀", subtitle: "Everyone's favorite!" },
+  ];
+
+  const [cardBackTitle, setCardBackTitle] = useState(cardBackText[0].title);
+  const [cardBackSubtitle, setCardBackSubtitle] = useState(cardBackText[0].subtitle);
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
   const description = `Zach is a front-end developer based in Atlanta, GA. In his free time, he enjoys gaming, studying history, taekwondo, and fencing.`;
   const flavorText = `"We're in the round era of web design. I predict by 2026, we'll enter another angular age."`;
@@ -153,15 +164,26 @@ const Landing = ({ isMobile }) => {
               </TitleContainer>
             </Grid>
             <Grid lg={3} className="flex">
-              {/* Possible to extract all this animation logic into a component? */}
+              {/* Extract all this animation logic into a component? */}
               <motion.div
                 animate={{
-                  rotateY: [0, 180, 360],
+                  rotateY: [0, 180, 180, 0],
+                  // rotateY: [0, 180],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 4,
                   repeat: Infinity,
+                  delay: 5, // Initial delay before first animation
+                  times: [0, 0.25, 1.75, 2], // Controls timing of each keyframe
                   repeatDelay: 10,
+                }}
+                onUpdate={(latest) => {
+                  // Check if a full rotation has been completed
+                  if (latest.rotateY === 0) {
+                    const index = Math.floor(Math.random() * cardBackText.length);
+                    setCardBackTitle(cardBackText[index].title);
+                    setCardBackSubtitle(cardBackText[index].subtitle);
+                  }
                 }}
                 style={{
                   transformStyle: "preserve-3d",
@@ -197,7 +219,13 @@ const Landing = ({ isMobile }) => {
                   />
                 </div>
                 {/* Back side */}
-                <CardBackSide title="HTML5" id="back-card" backCardWidth={backCardWidth} backCardHeight={backCardHeight} />
+                <CardBackSide
+                  title={cardBackTitle}
+                  subtitle={cardBackSubtitle}
+                  id="back-card"
+                  backCardWidth={backCardWidth}
+                  backCardHeight={backCardHeight}
+                />
               </motion.div>
             </Grid>
             <Grid lg={1}></Grid>

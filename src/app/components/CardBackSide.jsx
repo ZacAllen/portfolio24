@@ -1,6 +1,6 @@
 import { IconButton, Typography, styled } from "@mui/material";
 import Image from "next/image";
-import logoDark from "../../../public/assets/img/logodark.png";
+import logoDark from "../../../public/assets/img/logolight.png";
 
 const Container = styled("div")(({ theme, width, height }) => ({
   backfaceVisibility: "hidden",
@@ -13,10 +13,10 @@ const Container = styled("div")(({ theme, width, height }) => ({
   borderRadius: "16px",
 }));
 
-const Title = styled(Typography)(({ theme }) => ({
+const Title = styled(Typography)(({ theme, charCount }) => ({
   zIndex: 2,
   fontFamily: theme.typography.magicFont,
-  fontSize: "3.5rem",
+  fontSize: charCount < 6 ? "3.5rem" : "2.2rem",
   lineHeight: 1.2,
   WebkitTextStroke: "1px #000000",
   backgroundImage: "linear-gradient(to bottom, #3a7373, #51c8c8)",
@@ -24,12 +24,13 @@ const Title = styled(Typography)(({ theme }) => ({
   backgroundClip: "text",
 }));
 
-const SubTitle = styled(Typography)(({ theme }) => ({
+const SubTitle = styled(Typography)(({ theme, charCount }) => ({
   fontFamily: theme.typography.magicFont,
   color: "white",
   position: "absolute",
-  right: "10%",
-  bottom: "15%",
+  left: "25%",
+  bottom: charCount < 6 ? "15px" : "30px",
+  textWrap: "nowrap",
 }));
 
 const BottomText = styled(Typography)(({ theme }) => ({
@@ -50,11 +51,11 @@ const CardBackSide = ({ title, subtitle, backCardWidth, backCardHeight }) => {
             <div className="flex w-[90%] h-[90%] rounded-[50%] bg-[#a26147] outline-1 outline outline-teal-700">
               <div className="flex flex-col w-full h-full justify-between items-center">
                 <div className="relative text-[6rem] leading-[1.2] mt-[20%]">
-                  <Title>
+                  <Title charCount={title.length}>
                     <span className="text-[6rem] inline-block align-top leading-[6rem]">{title.charAt(0)}</span>
                     {title.slice(1)}
                   </Title>
-                  <SubTitle>It's a language!</SubTitle>
+                  <SubTitle charCount={title.length}>{subtitle}</SubTitle>
                 </div>
 
                 <IconButton className="!mt-[20%]">

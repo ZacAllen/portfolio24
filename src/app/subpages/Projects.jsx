@@ -221,16 +221,16 @@ const Projects = ({ isMobile }) => {
         />
       </motion.div>
     </div>,
-    <div className={!isMobile && "mCard"} key={"TBD"}>
+    <div className={!isMobile && "mCard"} key={"Copycat"}>
       <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
         <MCard
           setCurrentCard={setCurrentCard}
           isGroup
-          title="TBD"
-          image={"./assets/img/Me.jpg"}
-          type="FE Developer"
+          title="Copycat"
+          image={"./assets/img/copycat.png"}
+          type="Expo, React Native"
           background={`linear-gradient(to bottom, #faed84, #bacee4);`}
-          description={"Placeholder text Placeholder text Placeholder text Placeholder text "}
+          description={"Project in development, coming soon."}
           // flavorText={flavorText}
           footerIcons={footerIcons}
           footerText={"© 1997"}
