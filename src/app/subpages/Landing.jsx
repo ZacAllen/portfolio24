@@ -153,7 +153,7 @@ const Landing = () => {
   );
 
   return (
-    <>
+    <div>
       {isMobile ? (
         <StyledBox>
           <Title darkMode={darkMode}>Zach Allen</Title>
@@ -167,7 +167,7 @@ const Landing = () => {
             </SubHeaderText>
           </SubHeaderMobile>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center min-h-[500px]">
             {/* <MCard
               title="Zach Allen"
               image={"./assets/img/Me.jpg"}
@@ -217,7 +217,7 @@ const Landing = () => {
           </Grid>
         </LandingContainer>
       )}
-    </>
+    </div>
   );
 };
 

@@ -8,7 +8,6 @@ import Tools from "./subpages/Tools";
 
 const Home = () => {
   const theme = useTheme();
-  //TODO Transition isMobile to use context? Mobile-ness MUST be determined server side
   const [margins, setMargins] = useContext(MarginContext);
   useLayoutEffect(() => {
     setMargins({ edges: 1, center: 10 });

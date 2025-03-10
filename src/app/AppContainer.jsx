@@ -9,7 +9,6 @@ import { MobileProvider } from "@/utils/helpers/MobileContext";
 
 const AppContainer = ({ children, isMobile }) => {
   const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   return (
     <>
       <DarkModeContextProvider>
