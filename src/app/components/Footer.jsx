@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { styled, Typography, IconButton } from "@mui/material";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
+import { useMobile } from "@/utils/helpers/MobileContext";
 
-const Footer = ({ isMobile }) => {
+const Footer = () => {
+  const isMobile = useMobile();
   const { isDarkMode, textColor } = useContext(DarkModeContext);
   const FooterText = styled(Typography)(({ theme }) => ({
     color: textColor,

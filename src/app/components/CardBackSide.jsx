@@ -13,7 +13,9 @@ const Container = styled("div")(({ theme, width, height }) => ({
   borderRadius: "16px",
 }));
 
-const Title = styled(Typography)(({ theme, charCount }) => ({
+const Title = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "charCount",
+})(({ theme, charCount }) => ({
   zIndex: 2,
   fontFamily: theme.typography.magicFont,
   fontSize: charCount < 6 ? "3.5rem" : "2.2rem",
@@ -24,7 +26,9 @@ const Title = styled(Typography)(({ theme, charCount }) => ({
   backgroundClip: "text",
 }));
 
-const SubTitle = styled(Typography)(({ theme, charCount }) => ({
+const SubTitle = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "charCount",
+})(({ theme, charCount }) => ({
   fontFamily: theme.typography.magicFont,
   color: "white",
   position: "absolute",

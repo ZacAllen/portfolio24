@@ -24,6 +24,7 @@ import logo from "../../../public/assets/img/logolight.png";
 import logoDark from "../../../public/assets/img/logodark.png";
 import "./styles.css";
 import Link from "next/link";
+import { useMobile } from "@/utils/helpers/MobileContext";
 
 const StyledAppBar = styled(AppBar, { shouldForwardProp: (prop) => prop !== "darkMode" && prop !== "isExpanded" })(
   ({ theme, darkMode, isExpanded }) => {
@@ -161,7 +162,8 @@ const Collapse = styled(MuiCollapse)({
   paddingBottom: "2rem",
 });
 
-const Navbar = ({ isMobile }) => {
+const Navbar = () => {
+  const isMobile = useMobile();
   const darkMode = useContext(DarkModeContext);
   const [scope, animate] = useAnimate();
   const [scopeLogo, animateLogo] = useAnimate();

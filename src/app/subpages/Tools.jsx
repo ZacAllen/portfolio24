@@ -1,6 +1,7 @@
 "use client";
 import { useTheme, styled, Typography } from "@mui/material";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
+import { useMobile } from "@/utils/helpers/MobileContext";
 import { useContext, useState } from "react";
 import { AnimatePresence, motion, useAnimate } from "motion/react";
 import Image from "next/image";
@@ -52,7 +53,8 @@ const imgArray = {
   ],
 };
 
-const Tools = ({ isMobile }) => {
+const Tools = () => {
+  const isMobile = useMobile();
   const { isDarkMode, textColor, lighttext, darktext } = useContext(DarkModeContext);
 
   const SliderImage = styled(Image)({});

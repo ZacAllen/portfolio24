@@ -5,8 +5,10 @@ import github from "../../../public/assets/img/github.png";
 import { useAnimate, motion } from "motion/react";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from "@mui/material";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
+import { useMobile } from "@/utils/helpers/MobileContext";
 import MCard from "../components/MCard";
 import CardBackSide from "../components/CardBackSide";
+import RotatingCard from "../components/RotatingCard";
 
 const LandingContainer = styled("div")(({ theme }) => ({
   marginTop: "8rem",
@@ -79,10 +81,13 @@ const SubHeaderText = styled(Typography, { shouldForwardProp: (prop) => prop !==
   color: darkMode?.isDarkMode ? darkMode?.darktext : darkMode?.lighttext,
 }));
 
-const Landing = ({ isMobile }) => {
+const Landing = () => {
+  const isMobile = useMobile();
   const theme = useTheme();
   const [backCardWidth, setBackCardWidth] = useState(0);
   const [backCardHeight, setBackCardHeight] = useState(0);
+
+  console.log("*** BC Width n Height", backCardWidth, backCardHeight);
 
   const cardBackText = [
     { title: "HTML5", subtitle: "It's not programming?" },
@@ -106,8 +111,14 @@ const Landing = ({ isMobile }) => {
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        setBackCardWidth(entry.contentRect.width);
-        setBackCardHeight(entry.contentRect.height);
+        console.log("*** Elem", entry);
+        const width = entry.contentRect.width || entry.target.offsetWidth;
+        const height = entry.contentRect.height || entry.target.offsetHeight;
+
+        if (width > 0 && height > 0) {
+          setBackCardWidth(width);
+          setBackCardHeight(height);
+        }
       }
     });
 
@@ -117,6 +128,29 @@ const Landing = ({ isMobile }) => {
       resizeObserver.disconnect();
     };
   }, []);
+
+  const cardFront = (
+    <MCard
+      id="landing-card"
+      title="Zach Allen"
+      image={"./assets/img/Me.jpg"}
+      type="FE Developer - Human Nerd"
+      background={myCardBg}
+      description={description}
+      flavorText={flavorText}
+      footerIcons={footerIcons}
+      footerText={"© 1997"}
+    />
+  );
+  const cardBack = (
+    <CardBackSide
+      title={cardBackTitle}
+      subtitle={cardBackSubtitle}
+      id="back-card"
+      backCardWidth={backCardWidth}
+      backCardHeight={backCardHeight}
+    />
+  );
 
   return (
     <>
@@ -134,7 +168,7 @@ const Landing = ({ isMobile }) => {
           </SubHeaderMobile>
 
           <div className="flex justify-center">
-            <MCard
+            {/* <MCard
               title="Zach Allen"
               image={"./assets/img/Me.jpg"}
               type="FE Developer - Human Nerd"
@@ -143,6 +177,13 @@ const Landing = ({ isMobile }) => {
               flavorText={flavorText}
               footerIcons={footerIcons}
               footerText={"© 1997"}
+            /> */}
+            <RotatingCard
+              frontCardComponent={cardFront}
+              backCardComponent={cardBack}
+              cardBackText={cardBackText}
+              setCardBackSubtitle={setCardBackSubtitle}
+              setCardBackTitle={setCardBackTitle}
             />
           </div>
         </StyledBox>
@@ -164,69 +205,13 @@ const Landing = ({ isMobile }) => {
               </TitleContainer>
             </Grid>
             <Grid lg={3} className="flex">
-              {/* Extract all this animation logic into a component? */}
-              <motion.div
-                animate={{
-                  rotateY: [0, 180, 180, 0],
-                  // rotateY: [0, 180],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: 5, // Initial delay before first animation
-                  times: [0, 0.25, 1.75, 2], // Controls timing of each keyframe
-                  repeatDelay: 10,
-                }}
-                onUpdate={(latest) => {
-                  // Check if a full rotation has been completed
-                  if (latest.rotateY === 0) {
-                    const index = Math.floor(Math.random() * cardBackText.length);
-                    setCardBackTitle(cardBackText[index].title);
-                    setCardBackSubtitle(cardBackText[index].subtitle);
-                  }
-                }}
-                style={{
-                  transformStyle: "preserve-3d",
-                  perspective: 1000,
-                  position: "relative",
-                  transformOrigin: "center",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                {/* Front side */}
-                <div
-                  style={{
-                    backfaceVisibility: "hidden",
-                    position: "absolute",
-                    width: "100%",
-                    transform: "translateZ(1px)",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <MCard
-                    id="landing-card"
-                    title="Zach Allen"
-                    image={"./assets/img/Me.jpg"}
-                    type="FE Developer - Human Nerd"
-                    background={myCardBg}
-                    description={description}
-                    flavorText={flavorText}
-                    footerIcons={footerIcons}
-                    footerText={"© 1997"}
-                  />
-                </div>
-                {/* Back side */}
-                <CardBackSide
-                  title={cardBackTitle}
-                  subtitle={cardBackSubtitle}
-                  id="back-card"
-                  backCardWidth={backCardWidth}
-                  backCardHeight={backCardHeight}
-                />
-              </motion.div>
+              <RotatingCard
+                frontCardComponent={cardFront}
+                backCardComponent={cardBack}
+                cardBackText={cardBackText}
+                setCardBackSubtitle={setCardBackSubtitle}
+                setCardBackTitle={setCardBackTitle}
+              />
             </Grid>
             <Grid lg={1}></Grid>
           </Grid>

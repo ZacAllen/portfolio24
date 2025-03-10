@@ -3,6 +3,7 @@ import AppContainer from "./AppContainer";
 import { createTheme, ThemeProvider } from "@mui/material";
 import theme from "@/theme";
 import "./globals.css";
+import { isMobile } from "react-device-detect";
 
 export const metadata = {
   title: "Zach Allen - Frontend Dev",
@@ -11,13 +12,14 @@ export const metadata = {
 
 /* Layout contains all components of website pages denoted as children */
 export default function RootLayout({ children }) {
+  // const isMobile = true;
   return (
     <html lang="en">
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
           <body>
             <link rel="stylesheet" href="./globals.css" />
-            <AppContainer children={children} />
+            <AppContainer children={children} isMobile={isMobile} />
           </body>
         </ThemeProvider>
       </AppRouterCacheProvider>

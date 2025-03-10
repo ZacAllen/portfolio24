@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import MCard from "../components/MCard";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
+import { useMobile } from "@/utils/helpers/MobileContext";
 import { useInView } from "react-intersection-observer";
 
 import linkedin from "../../../public/assets/img/linkedin.webp";
@@ -135,7 +136,8 @@ const CardContainer = styled("div", {
   },
 }));
 
-const Projects = ({ isMobile }) => {
+const Projects = () => {
+  const isMobile = useMobile();
   const darkMode = useContext(DarkModeContext);
 
   const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
