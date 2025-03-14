@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useContext, useState } from "react";
+import Link from "next/link";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "motion/react";
@@ -12,6 +13,8 @@ import MCard from "../components/MCard";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import { useMobile } from "@/utils/helpers/MobileContext";
 import { useInView } from "react-intersection-observer";
+import ProjectModal from "../components/ProjectModal";
+import { projects } from "@/utils/helpers/projectsConfig";
 
 import linkedin from "../../../public/assets/img/linkedin.webp";
 import github from "../../../public/assets/img/github.png";
@@ -144,6 +147,7 @@ const Projects = () => {
   const footerIcons = [github];
   const [triggerAnim, setTriggerAnim] = useState(false);
   const [currentCard, setCurrentCard] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const { ref, inView } = useInView({});
   const isTablet = useMediaQuery("(min-width:768px)");
 
@@ -152,98 +156,42 @@ const Projects = () => {
     if (inView === true) setTriggerAnim(true);
   }, [inView]);
 
-  useEffect(() => {});
+  const handleProjectModalOpen = (open) => {
+    console.log("*** ", open);
+    setModalOpen(open);
+  };
 
   const pageWidth = 1920;
   const pageHeight = 1080;
-  const projectCards = [
-    <div id="projects" className={!isMobile && "mCard"} key={"Sveltedex"}>
-      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="Sveltedex"
-          image={"./assets/img/sveltedex.png"}
-          type="Svelte, Firebase"
-          background={`linear-gradient(to bottom, #e35f48, #e4e0ba);`}
-          description="A Pokemon encyclopedia modeled after the in-game Pokedex tool; created with Svelte as frontend framework and hosted with Firebase"
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 2022"}
-        />
-      </motion.div>
-    </div>,
-    <div className={!isMobile && "mCard"} key={"DreamyBot"}>
-      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="DreamyBot"
-          image={"./assets/img/dreamybot.png"}
-          type="JS, discord.js, OpenAI API"
-          background={`linear-gradient(to bottom, #302f3c, #3c2ea0);`}
-          description={
-            "Discord bot with multiple functionalities, mainly voice channel youtube playback and ChatGPT + Stable Diffusion integration."
-          }
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 2023"}
-        />
-      </motion.div>
-    </div>,
-    <div className={!isMobile && "mCard"} key={"Portfolio"}>
-      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="Portfolio Website"
-          image={"./assets/img/personal website.png"}
-          type="Next.js, Netlify"
-          background={myCardBg}
-          description={"This Portfolio Website, created with Next.js and hosted with Netlify."}
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 2024"}
-        />
-      </motion.div>
-    </div>,
-    <div className={!isMobile && "mCard"} key={"Numberle"}>
-      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="Numberle"
-          image={"./assets/img/numberle.png"}
-          type="ReactJS, Netlify"
-          background={`linear-gradient(to bottom, #38b24a, #cbbf55);`}
-          description={"A parody of the popular puzzle game Wordle, made in React and hosted with Netlify."}
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 2022"}
-        />
-      </motion.div>
-    </div>,
-    <div className={!isMobile && "mCard"} key={"Copycat"}>
-      <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
-        <MCard
-          setCurrentCard={setCurrentCard}
-          isGroup
-          title="Copycat"
-          image={"./assets/img/copycat.png"}
-          type="Expo, React Native"
-          background={`linear-gradient(to bottom, #faed84, #bacee4);`}
-          description={"Project in development, coming soon."}
-          // flavorText={flavorText}
-          footerIcons={footerIcons}
-          footerText={"© 1997"}
-        />
-      </motion.div>
-    </div>,
-  ];
+  const projectCards = projects.map((proj) => {
+    return (
+      <div className={!isMobile && "mCard"} key={proj.name}>
+        <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
+          <div onClick={() => handleProjectModalOpen(true)}>
+            <MCard
+              setCurrentCard={setCurrentCard}
+              isGroup
+              title={proj.name}
+              image={proj.image}
+              type={proj.typeline}
+              background={proj.backgroundColor}
+              description={proj.shortDesc}
+              // flavorText={flavorText}
+              footerIcons={footerIcons}
+              footerText={proj.footerText}
+            />
+          </div>
+        </motion.div>
+      </div>
+    );
+  });
 
   return (
     <>
-      <Title darkMode={darkMode}>Projects</Title>
+      <ProjectModal open={modalOpen} setOpen={setModalOpen} projectName={currentCard} />
+      <Title id="projects" darkMode={darkMode}>
+        Projects
+      </Title>
       <ProjectsContainer>
         {isMobile ? (
           <div className="w-full mt-8">
