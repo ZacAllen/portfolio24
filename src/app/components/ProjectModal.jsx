@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect, useContext } from 'react'
+import Image from 'next/image'
 import { motion, useAnimate } from 'motion/react'
 import { Modal, Typography, Button, styled, CircularProgress, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
@@ -63,7 +64,9 @@ const ProjectModal = ({ open, setOpen, projectName }) => {
               <Title>{project?.name}</Title>
             </div>
             <div className="grid grid-cols-4 gap-4">
-              <div className="col-span-2"></div>
+              <div className="col-span-2">
+                <Image src={project?.image} width={250} height={250} />
+              </div>
               <div className="col-span-2"></div>
             </div>
             <CloseButton onClick={() => closeModal()}>

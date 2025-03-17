@@ -1,70 +1,73 @@
-"use client";
-import React, { useEffect, useContext, useState } from "react";
-import Link from "next/link";
-import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { motion } from "motion/react";
-import { Navigation, EffectCards, Pagination, Scrollbar, A11y } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import MCard from "../components/MCard";
-import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
-import { useMobile } from "@/utils/helpers/MobileContext";
-import { useInView } from "react-intersection-observer";
-import ProjectModal from "../components/ProjectModal";
-import { projects } from "@/utils/helpers/projectsConfig";
+'use client'
+import React, { useEffect, useContext, useState } from 'react'
+import Link from 'next/link'
+import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider, keyframes } from '@mui/material'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import dreamy from '@/app/assets/img/dreamybot.png'
+import { motion } from 'motion/react'
+import { Navigation, EffectCards, Pagination, Scrollbar, A11y } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import MCard from '../components/MCard'
+import { DarkModeContext } from '@/utils/helpers/DarkModeContext'
+import { useMobile } from '@/utils/helpers/MobileContext'
+import { useInView } from 'react-intersection-observer'
+import ProjectModal from '../components/ProjectModal'
+import { projects } from '@/utils/helpers/projectsConfig'
 
-import linkedin from "../../../public/assets/img/linkedin.webp";
-import github from "../../../public/assets/img/github.png";
+import linkedin from '../../../public/assets/img/linkedin.webp'
+import github from '../../../public/assets/img/github.png'
 
-const ProjectsContainer = styled("div")(({ theme }) => ({
-  height: "48rem",
-  display: "flex",
-  maxWidth: "100vw",
-  alignItems: "center",
-  [theme.breakpoints.down("md")]: {
-    alignItems: "baseline",
+const ProjectsContainer = styled('div')(({ theme }) => ({
+  height: '48rem',
+  display: 'flex',
+  maxWidth: '100vw',
+  alignItems: 'center',
+  [theme.breakpoints.down('md')]: {
+    alignItems: 'baseline',
   },
-  "& .swiper-3d .swiper-slide-shadow": {
-    background: "none !important",
+  '& .swiper-3d .swiper-slide-shadow': {
+    background: 'none !important',
   },
-  "& .swiper-pagination": {
-    bottom: "-10% !important",
+  '& .swiper-pagination': {
+    bottom: '-10% !important',
   },
-  "& .swiper-pagination-bullet-active": {
+  '& .swiper-pagination-bullet-active': {
     background: theme.palette.primary.main,
   },
-}));
+}))
 
-const Title = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
+const Title = styled(Typography, { shouldForwardProp: (prop) => prop !== 'darkMode' })(({ theme, darkMode }) => ({
   color: darkMode?.textColor,
   fontFamily: theme.typography.mainFont,
-  fontSize: "4rem",
-  lineHeight: "0.75",
-  [theme.breakpoints.down("sm")]: {
+  fontSize: '4rem',
+  lineHeight: '0.75',
+  [theme.breakpoints.down('sm')]: {
     padding: 0,
-    fontSize: "4rem",
+    fontSize: '4rem',
   },
-}));
+}))
 
-const CurrentProjectTitle = styled(Typography, { shouldForwardProp: (prop) => prop !== "darkMode" })(({ theme, darkMode }) => ({
-  color: darkMode?.textColor,
-  WebkitTextStroke: "1px navy",
-  fontFamily: theme.typography.mainFont,
-  position: "absolute",
-  top: "22rem",
-  fontSize: "2.5rem",
-}));
+const CurrentProjectTitle = styled(Typography, { shouldForwardProp: (prop) => prop !== 'darkMode' })(
+  ({ theme, darkMode }) => ({
+    color: darkMode?.textColor,
+    WebkitTextStroke: '1px navy',
+    fontFamily: theme.typography.mainFont,
+    position: 'absolute',
+    top: '22rem',
+    fontSize: '2.5rem',
+  }),
+)
 
 const StyledSwiper = styled(Swiper)(({ theme }) => ({
-  maxWidth: "380px",
-  overflow: "visible",
-  [theme.breakpoints.down("sm")]: {
-    marginLeft: "10%",
+  maxWidth: '380px',
+  overflow: 'visible',
+  [theme.breakpoints.down('sm')]: {
+    marginLeft: '10%',
   },
-}));
+}))
 
 /**
  *
@@ -76,8 +79,8 @@ const StyledSwiper = styled(Swiper)(({ theme }) => ({
  * @returns
  */
 const fan = (rC, tX, tY, pW, pH, triggerAnim) => {
-  const xValue = (tX / pW) * 100;
-  const yValue = (tY / pH) * 100;
+  const xValue = (tX / pW) * 100
+  const yValue = (tY / pH) * 100
 
   if (triggerAnim) {
     return keyframes`
@@ -89,83 +92,83 @@ const fan = (rC, tX, tY, pW, pH, triggerAnim) => {
     transform: rotate(${rC}) translateX(${xValue}vw) translateY(${yValue}vh);
     opacity: 1;
   }  
-`;
+`
   }
-};
+}
 
-const animTime = `0.5s`;
+const animTime = `0.5s`
 
-const CardContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "pageWidth" && prop !== "pageHeight" && prop !== "triggerAnim",
+const CardContainer = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'pageWidth' && prop !== 'pageHeight' && prop !== 'triggerAnim',
 })(({ theme, pageWidth, pageHeight, triggerAnim }) => ({
-  display: "flex",
-  width: "100%",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "10px",
-  position: "relative",
-  marginBottom: "12rem",
-  "& .mCard": {
-    opacity: "0",
-    maxWidth: "calc(22% - 20px)",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    cursor: "pointer",
-    "&:hover": {
-      zIndex: "99 !important",
+  display: 'flex',
+  width: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '10px',
+  position: 'relative',
+  marginBottom: '12rem',
+  '& .mCard': {
+    opacity: '0',
+    maxWidth: 'calc(22% - 20px)',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    cursor: 'pointer',
+    '&:hover': {
+      zIndex: '99 !important',
     },
   },
-  "& .mCard:nth-child(1)": {
+  '& .mCard:nth-child(1)': {
     zIndex: 5,
-    animation: `${fan("30deg", 200, -260, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
+    animation: `${fan('30deg', 200, -260, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
-  "& .mCard:nth-child(2)": {
+  '& .mCard:nth-child(2)': {
     zIndex: 4,
-    animation: `${fan("15deg", 30, -250, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
+    animation: `${fan('15deg', 30, -250, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
-  "& .mCard:nth-child(3)": {
+  '& .mCard:nth-child(3)': {
     zIndex: 3,
     animation: `${fan(null, 0, -150, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
-  "& .mCard:nth-child(4)": {
+  '& .mCard:nth-child(4)': {
     zIndex: 2,
-    animation: `${fan("-15deg", -315, -340, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
+    animation: `${fan('-15deg', -315, -340, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
-  "& .mCard:nth-child(5)": {
+  '& .mCard:nth-child(5)': {
     zIndex: 1,
-    animation: `${fan("-30deg", -460, -440, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
+    animation: `${fan('-30deg', -460, -440, pageWidth, pageHeight, triggerAnim)} ${animTime} forwards 0.3s`,
   },
-}));
+}))
 
 const Projects = () => {
-  const isMobile = useMobile();
-  const darkMode = useContext(DarkModeContext);
+  const isMobile = useMobile()
+  const darkMode = useContext(DarkModeContext)
 
-  const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`;
-  const footerIcons = [github];
-  const [triggerAnim, setTriggerAnim] = useState(false);
-  const [currentCard, setCurrentCard] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
-  const { ref, inView } = useInView({});
-  const isTablet = useMediaQuery("(min-width:768px)");
+  const myCardBg = `linear-gradient(to bottom, #485A9A, #3A4634);`
+  const footerIcons = [github]
+  const [triggerAnim, setTriggerAnim] = useState(false)
+  const [currentCard, setCurrentCard] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
+  const { ref, inView } = useInView({})
+  const isTablet = useMediaQuery('(min-width:768px)')
 
   useEffect(() => {
     // ** Just do initial animation on scroll-in for now
-    if (inView === true) setTriggerAnim(true);
-  }, [inView]);
+    if (inView === true) setTriggerAnim(true)
+  }, [inView])
 
   const handleProjectModalOpen = (open) => {
-    console.log("*** ", open);
-    setModalOpen(open);
-  };
+    console.log('*** ', open)
+    setModalOpen(open)
+  }
 
-  const pageWidth = 1920;
-  const pageHeight = 1080;
+  const pageWidth = 1920
+  const pageHeight = 1080
   const projectCards = projects.map((proj) => {
     return (
-      <div className={!isMobile && "mCard"} key={proj.name}>
+      <div className={!isMobile && 'mCard'} key={proj.name}>
         <motion.div whileHover={{ scale: !isMobile && 1.1 }}>
           <div onClick={() => handleProjectModalOpen(true)}>
             <MCard
@@ -183,8 +186,8 @@ const Projects = () => {
           </div>
         </motion.div>
       </div>
-    );
-  });
+    )
+  })
 
   return (
     <>
@@ -196,7 +199,7 @@ const Projects = () => {
         {isMobile ? (
           <div className="w-full mt-8">
             <StyledSwiper
-              effect={"cards"}
+              effect={'cards'}
               pagination={true}
               grabCursor={true}
               modules={[EffectCards, Navigation, Pagination, A11y]}
@@ -214,7 +217,7 @@ const Projects = () => {
         )}
       </ProjectsContainer>
     </>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects
