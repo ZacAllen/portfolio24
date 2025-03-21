@@ -97,6 +97,7 @@ const ProjectModal = ({ open, setOpen, projectName }) => {
               <>
                 <div className="w-full text-left pt-8 md:pt-0">
                   <Title>{project?.name}</Title>
+                  <hr></hr>
                 </div>
                 <div className="my-6 md:grid md:grid-cols-4 gap-8 w-full">
                   <div className=" md:col-span-2 relative md:max-w-full md:w-full h-[10rem] md:h-[20rem] my-4 md:my-0">
