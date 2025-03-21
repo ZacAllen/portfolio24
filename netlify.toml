@@ -1,4 +1,5 @@
 [build]
+    command = "node ./create-env.js && npm run build"
     publish = ".next"
     
 [[plugins]]
