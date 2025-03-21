@@ -89,7 +89,7 @@ const ProjectModal = ({ open, setOpen, projectName }) => {
       <StyledModal open={open} onClose={() => closeModal()} disableEnforceFocus disableAutoFocus>
         <motion.div ref={scope}>
           <StyledContainer
-            className="max-h-[90vh] min-h-[85vh] md:min-h-0 overflow-y-scroll md:overflow-hidden flex flex-col md:justify-center items-center relative rounded-xl p-4 md:p-8 lg:w-[60rem] md:w-[40rem] sm:w-[20rem] w-[18rem]"
+            className="max-h-[80vh] min-h-[65vh] md:min-h-0 overflow-y-scroll md:overflow-hidden flex flex-col md:justify-center items-center relative rounded-xl p-4 md:p-8 lg:w-[60rem] md:w-[40rem] sm:w-[20rem] w-[18rem]"
             bgColor={project?.backgroundColor}
           >
             {project?.name !== "Copycat" ? (
@@ -100,6 +100,7 @@ const ProjectModal = ({ open, setOpen, projectName }) => {
                 </div>
                 <div className="my-6 md:grid md:grid-cols-4 gap-8 w-full">
                   <div className="flex items-center justify-center md:col-span-2 relative md:max-w-full md:w-full h-[10rem] md:h-[20rem] my-4 md:my-0">
+                    {/* //TODO replace with Skeleton  */}
                     {isLoading && <CircularProgress />}
                     <StyledImage
                       src={project?.fullImage}
