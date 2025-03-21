@@ -2,7 +2,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import linkedin from "../../../public/assets/img/linkedin.webp";
 import github from "../../../public/assets/img/github.png";
-import { useAnimate, motion } from "motion/react";
 import { useTheme, Grid, styled, Typography, useMediaQuery, Box, Divider } from "@mui/material";
 import { DarkModeContext } from "@/utils/helpers/DarkModeContext";
 import { useMobile } from "@/utils/helpers/MobileContext";
@@ -87,8 +86,6 @@ const Landing = () => {
   const [backCardWidth, setBackCardWidth] = useState(0);
   const [backCardHeight, setBackCardHeight] = useState(0);
 
-  console.log("*** BC Width n Height", backCardWidth, backCardHeight);
-
   const cardBackText = [
     { title: "HTML5", subtitle: "It's not programming?" },
     { title: "CSS3⠀", subtitle: "Can you center a div?" },
@@ -111,7 +108,6 @@ const Landing = () => {
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        console.log("*** Elem", entry);
         const width = entry.contentRect.width || entry.target.offsetWidth;
         const height = entry.contentRect.height || entry.target.offsetHeight;
 
@@ -168,16 +164,6 @@ const Landing = () => {
           </SubHeaderMobile>
 
           <div className="flex justify-center min-h-[500px]">
-            {/* <MCard
-              title="Zach Allen"
-              image={"./assets/img/Me.jpg"}
-              type="FE Developer - Human Nerd"
-              background={myCardBg}
-              description={description}
-              flavorText={flavorText}
-              footerIcons={footerIcons}
-              footerText={"© 1997"}
-            /> */}
             <RotatingCard
               frontCardComponent={cardFront}
               backCardComponent={cardBack}

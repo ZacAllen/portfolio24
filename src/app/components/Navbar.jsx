@@ -210,7 +210,7 @@ const Navbar = () => {
           {!isMobile ? (
             <NavContainer>
               <NavLeft>
-                <Link href="/">
+                <Link href="/" prefetch>
                   <IconButton size="large" edge="start" color="inherit" aria-label="home">
                     <motion.div ref={scopeLogo} style={{ transformOrigin: "center" }}>
                       <Logo src={darkMode?.isDarkMode ? logoDark : logo} width={75} height={75} alt="Zach Allen Logo" />
@@ -218,7 +218,7 @@ const Navbar = () => {
                   </IconButton>
                 </Link>
 
-                <Link href="/#projects">
+                <Link href="/#projects" prefetch>
                   <NavButton darkMode={darkMode} sx={{ ml: 8 }}>
                     Projects
                   </NavButton>
@@ -229,7 +229,7 @@ const Navbar = () => {
                 </NavButton>
               </NavLeft>
               <NavRight>
-                <Link href="/contact">
+                <Link href="/contact" prefetch>
                   <NavButton darkMode={darkMode}>Contact</NavButton>
                 </Link>
                 <motion.div ref={scope}>
@@ -250,7 +250,7 @@ const Navbar = () => {
             <div className="flex flex-col w-screen">
               <NavContainer>
                 <NavLeft>
-                  <Link href="/">
+                  <Link href="/" prefetch>
                     <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 8 }}>
                       <Logo src={darkMode?.isDarkMode ? logoDark : logo} width={50} height={50} />
                     </IconButton>
@@ -277,7 +277,7 @@ const Navbar = () => {
               <Box>
                 <Collapse in={isExpanded} timeout={300} sx={{ borderTop: isExpanded && `1px solid ${darkMode?.textColor}` }}>
                   <div>
-                    <Link href={"/#projects"} onClick={() => handleMenuExpand(isExpanded)}>
+                    <Link href={"/#projects"} onClick={() => handleMenuExpand(isExpanded)} prefetch>
                       <MobileLink darkMode={darkMode}>Projects</MobileLink>
                     </Link>
                     <Divider />
@@ -289,7 +289,7 @@ const Navbar = () => {
                     <Divider />
                   </div>
                   <div>
-                    <Link href="/contact" onClick={() => handleMenuExpand(isExpanded)}>
+                    <Link href="/contact" onClick={() => handleMenuExpand(isExpanded)} prefetch>
                       <MobileLink darkMode={darkMode}>Contact</MobileLink>
                     </Link>
                     <Divider />
