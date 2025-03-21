@@ -32,12 +32,6 @@ export const sendEmail = (e, form) => {
       backdrop: `rgba(76, 240, 109, 0.1)`,
     });
   } else {
-    console.log(
-      "*** Ok",
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-      process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID
-    );
     emailjs
       .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, form.current, {
         publicKey: process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID,
