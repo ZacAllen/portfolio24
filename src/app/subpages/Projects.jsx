@@ -157,7 +157,6 @@ const Projects = () => {
   }, [inView]);
 
   const handleProjectModalOpen = (open) => {
-    console.log("*** ", open);
     setModalOpen(open);
   };
 

@@ -63,21 +63,20 @@ const ProjectLink = styled(Link)(({ theme }) => ({
 
 const ProjectModal = ({ open, setOpen, projectName }) => {
   const [scope, animate] = useAnimate();
+  const [isLoading, setLoading] = useState(true);
   const [project, setProject] = useState({});
   const { background } = useContext(DarkModeContext);
-  console.log("*** BFG", background);
 
   useEffect(() => {
     setProject(projects.find((proj) => proj.name === projectName));
   }, [projectName]);
-
-  console.log("*** Project", project, projectName);
 
   useEffect(() => {
     // animate(scope.current, { translateY: "100vh" }, { ease: "linear", duration: 0.2 });
   }, [open]);
 
   const closeModal = () => {
+    setLoading(true);
     // animate(scope.current, { translateY: "0vh" }, { ease: "linear", duration: 0.2 }).then(() => {
     setOpen(false);
     // });
@@ -100,8 +99,15 @@ const ProjectModal = ({ open, setOpen, projectName }) => {
                   <hr></hr>
                 </div>
                 <div className="my-6 md:grid md:grid-cols-4 gap-8 w-full">
-                  <div className=" md:col-span-2 relative md:max-w-full md:w-full h-[10rem] md:h-[20rem] my-4 md:my-0">
-                    <StyledImage src={project?.fullImage} layout="fill" objectFit="cover" alt={`${project?.name}-image`} />
+                  <div className="flex items-center justify-center md:col-span-2 relative md:max-w-full md:w-full h-[10rem] md:h-[20rem] my-4 md:my-0">
+                    {isLoading && <CircularProgress />}
+                    <StyledImage
+                      src={project?.fullImage}
+                      layout="fill"
+                      objectFit="cover"
+                      alt={`${project?.name}-image`}
+                      onLoad={() => setLoading(false)}
+                    />
                   </div>
                   <div className="md:col-span-2 w-full my-4 md:my-0">
                     <Stack className="!text-[24px]">Tools & Tech Stack:</Stack>
