@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { motion, useAnimate } from "motion/react";
-import { Modal, Typography, Button, styled, CircularProgress, IconButton } from "@mui/material";
+import { Modal, Typography, Button, styled, CircularProgress, IconButton, Skeleton } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CloseIcon from "@mui/icons-material/Close";
 import { projects } from "@/utils/helpers/projectsConfig";
@@ -101,7 +101,7 @@ const ProjectModal = ({ open, setOpen, projectName }) => {
                 <div className="my-6 md:grid md:grid-cols-4 gap-8 w-full">
                   <div className="flex items-center justify-center md:col-span-2 relative md:max-w-full md:w-full h-[10rem] md:h-[20rem] my-4 md:my-0">
                     {/* //TODO replace with Skeleton  */}
-                    {isLoading && <CircularProgress />}
+                    {isLoading && <Skeleton variant="rectangular" width={"100%"} height={"100%"} />}
                     <StyledImage
                       src={project?.fullImage}
                       layout="fill"
